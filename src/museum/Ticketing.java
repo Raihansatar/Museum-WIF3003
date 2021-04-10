@@ -1,27 +1,30 @@
 package museum;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Ticketing implements Runnable{
 
 	protected Museum museum;
 	protected Ticket t[];
-//	protected Entering entering;
+	protected TicketSystem ticketSystem;
 	Random rand  = new Random();
+	Scanner scan = new Scanner(System.in);
 	
-	public Ticketing(Museum museum) {
+	public Ticketing(Museum museum, TicketSystem ticketSystem) {
 		// TODO Auto-generated constructor stub
 		this.museum = museum;
-//		this.entering = entering;
+		this.ticketSystem = ticketSystem;
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 //		this.t = museum.buyTicket(rand.nextInt(2) + 1); // array of tickets
-		
-		this.t = buy(rand.nextInt(2) + 1); // array of tickets
-		
+//			System.out.print(Thread.currentThread().getName() + " - How may ticket you want to buy? : \n");
+//			this.t = buy(scan.nextInt());			
+//		this.t = buy(rand.nextInt(2) + 1); // array of tickets
+		 this.t = ticketSystem.buyTicket();
 		
 		
 		if(this.t != null) {
@@ -43,5 +46,7 @@ public class Ticketing implements Runnable{
 		Ticket []ticket = museum.buyTicket(number);
 		return ticket;
 	}
+	
+	
 
 }

@@ -15,7 +15,6 @@ public class Museum {
 	protected int ticket;
 	protected int totalTicket;
 	protected DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-	protected Lock lock;
 
 	protected boolean[] NET = {false, false, false, false};
 	protected boolean[] SET = {false, false, false, false};
@@ -29,7 +28,6 @@ public class Museum {
 		this.visitor = 0;
 		this.maxVisitor = maxVisitor;
 		this.ticket = 0;
-		this.lock = new ReentrantLock();
 		this.totalTicket = totalTicket;
 	}
 	
