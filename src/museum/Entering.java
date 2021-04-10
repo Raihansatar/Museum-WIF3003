@@ -15,6 +15,7 @@ public class Entering implements Runnable{
 		this.ticket = ticket;
 		this.staying = staying;
 		
+		
 	}
 
 	@Override
