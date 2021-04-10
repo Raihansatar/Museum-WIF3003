@@ -14,14 +14,11 @@ public class Entering implements Runnable{
 		this.museum = museum;
 		this.ticket = ticket;
 		this.staying = staying;
-		
-		
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-//		int random = rand.nextInt(2) + 1;
 		int randomExit = rand.nextInt(2) + 1;
 		if(randomExit == 1) {
 			museum.enterNorth(this.ticket, staying);	

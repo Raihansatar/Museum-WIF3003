@@ -16,9 +16,12 @@ public class Museum {
 	protected int totalTicket;
 	protected DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 	protected Lock lock;
-	protected boolean NET1, NET2, NET3, NET4, SE1, SE2, SE3, SE4 = false;
-	int northGate=0;
-//	protected int southGate;
+
+	protected boolean[] NET = {false, false, false, false};
+	protected boolean[] SET = {false, false, false, false};
+	protected boolean[] EET = {false, false, false, false};
+	protected boolean[] WET = {false, false, false, false};
+	
 	Random rand = new Random();
 	
 	public Museum(int maxVisitor ,int totalTicket) {
@@ -41,88 +44,24 @@ public class Museum {
 			}
 		}
 		
+		int turnstiles = rand.nextInt(4);
 		
-		int gate = randomGate(0);
-		
-		switch (gate) {
-		case 0: {
-			SE1 = true;
-			while(SE1 == false) {
-				try {
-					System.out.println("Waiting... South gate exceed limit");
-					wait();
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+		while(SET[turnstiles] == true) {
+			try {
+				System.out.println("Waiting... Queue turnstiles SET" + turnstiles);
+				wait();
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
 			}
-			break;
 		}
-		case 1: {
-			SE2 = true;
-			while(SE2 == false) {
-				try {
-					System.out.println("Waiting... South gate exceed limit");
-					wait();
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-			}
-			break;
-		}
-		case 2: {
-			SE3 = true;
-			while(SE3 == false) {
-				try {
-					System.out.println("Waiting... South gate exceed limit");
-					wait();
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-			}
-			break;
-		}
-		case 3: {
-			SE4 = true;
-			while(SE4 == false) {
-				try {
-					System.out.println("Waiting... South gate exceed limit");
-					wait();
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-			}
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + gate);
-		}
+		SET[turnstiles] = true;
 		
 		visitor++;
 		System.out.print(dateFormat.format(new Date()) + " - ");
-		System.out.print("T00" + t.getID() + " entering through Turnsile SET"+gate+". Staying for " + staying + " minutes  \n");
-//		System.out.println("Visitor with "+t.getID()+ "  enter the museum South gate at: " + dateFormat.format(new Date()));
-//		System.out.println("Total Visitor: " + this.visitor);
-		
-		switch (gate) {
-		case 0: {
-			SE1 = false;
-			break;
-		}
-		case 1: {
-			SE2 = false;
-			break;
-		}
-		case 2: {
-			SE3 = false;
-			break;
-		}
-		case 3: {
-			SE4 = false;
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + gate);
-		}
+		System.out.print("T00" + t.getID() + " entering through Turnsile SET"+ turnstiles +". Staying for " + staying + " minutes  \n");
+		SET[turnstiles] = false;
+				
 		notifyAll();
 	}
 	
@@ -137,76 +76,91 @@ public class Museum {
 			}
 		}
 		
-		while(this.northGate>3) {
+		int turnstiles = rand.nextInt(4);
+		while(NET[turnstiles] == true) {
 			try {
-				System.out.println("Waiting... North gate exceed limit");
+				System.out.println("Waiting... Queue turnstiles NET" + turnstiles);
 				wait();
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 		}
+		NET[turnstiles] = true;
+		
 		visitor++;
-		this.northGate++;
 		System.out.print(dateFormat.format(new Date()) + " - ");
-		System.out.print("T00" + t.getID() + " entering through Turnsile NET"+this.northGate+". Staying for " + staying + " minutes \n");
-//		System.out.println("Visitor with "+t.getID()+ " enter the museum North Gate at: " + dateFormat.format(new Date()));
-//		System.out.println("Total Visitor: " + this.visitor);
-		this.northGate--;
+		System.out.print("T00" + t.getID() + " entering through Turnsile NET"+turnstiles+". Staying for " + staying + " minutes \n");
+		
+		NET[turnstiles] = false;
 		notifyAll();
 	}
 	
 	public synchronized void exitEast(Ticket ticket) {
+		int turnstiles = rand.nextInt(4);
+		while(EET[turnstiles] == true) {
+			try {
+				System.out.println("Waiting... Queue turnstiles EET" + turnstiles);
+				wait();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
+		EET[turnstiles] = true;
+		
 		visitor--;
 		System.out.print(dateFormat.format(new Date()) + " - ");
-		System.out.print("Ticket T00" + ticket.getID() + " exited through Turnstile EETX ");
-		System.out.println("Total Visitor: " + this.visitor);
+		System.out.print("Ticket T00" + ticket.getID() + " exited through Turnstile EET" + turnstiles);
+		System.out.println("  Total Visitor: " + this.visitor);
+		EET[turnstiles] = false;
+		
 		notifyAll();
 	}
 	
 	public synchronized void exitWest(Ticket ticket) {
+		int turnstiles = rand.nextInt(4);
+		while(WET[turnstiles] == true) {
+			try {
+				System.out.println("Waiting... Queue turnstiles EET" + turnstiles);
+				wait();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
+		WET[turnstiles] = true;
+		
 		visitor--;
 		System.out.print(dateFormat.format(new Date()) + " - ");
-		System.out.print("Ticket T00" + ticket.getID() + " exited through Turnstile EWTX ");
-		System.out.println("Total Visitor: " + this.visitor);
+		System.out.print("Ticket T00" + ticket.getID() + " exited through Turnstile EWT" + turnstiles);
+		System.out.println("  Total Visitor: " + this.visitor);
+		WET[turnstiles] = false;
+		
 		notifyAll();
 	}
 
 	public synchronized Ticket[] buyTicket(int number) {
 
-		
-		if(ticket >= this.totalTicket) {
+		if(ticket > this.totalTicket) {
 			try {
 				System.out.println("Out of ticket." + Thread.currentThread().getName());
 				Thread.currentThread().interrupt();
 			} catch (Exception e) {
 				// TODO: handle exception
+				e.printStackTrace();
 			}
 			return null;
 		}else {
-//			System.out.println(Thread.currentThread().getName() + " bought " + number + " ticket");
-			Ticket[] t = new Ticket[number];
+			Ticket[] ticket = new Ticket[number];
 			System.out.print(dateFormat.format(new Date()) + " - ");
 			for (int i = 0; i < number; i++) {
 				
-//				System.out.println("Current ticket: " + this.ticket);
 				System.out.print("T00" + this.ticket + " ");
-				t[i] = new Ticket(this.ticket);
+				ticket[i] = new Ticket(this.ticket);
 				this.ticket++;
 			}
 			System.out.println("SOLD");
-			return t;
+			return ticket;
 		}
-	}
-	
-	public int randomGate(int type) {
-		
-		int gateID;
-		if(type == 0) { //southGate
-			gateID  = rand.nextInt(4);
-		}else { //northgate
-			gateID = 0;
-		}
-		
-		return gateID;
 	}
 }
