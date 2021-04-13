@@ -23,8 +23,8 @@ public class Ticketing implements Runnable{
 //		this.t = museum.buyTicket(rand.nextInt(2) + 1); // array of tickets
 //			System.out.print(Thread.currentThread().getName() + " - How may ticket you want to buy? : \n");
 //			this.t = buy(scan.nextInt());			
-//		this.t = buy(rand.nextInt(2) + 1); // array of tickets
-		 this.t = ticketSystem.buyTicket();
+		this.t = buy(rand.nextInt(2) + 1); // array of tickets
+//		 this.t = ticketSystem.buyTicket();
 		
 		
 		if(this.t != null) {

@@ -54,7 +54,7 @@ public class Museum {
 			}
 		}
 		SET[turnstiles] = true;
-		
+		// sleep
 		visitor++;
 		System.out.print(dateFormat.format(new Date()) + " - ");
 		System.out.print("T00" + t.getID() + " entering through Turnsile SET"+ turnstiles +". Staying for " + staying + " minutes  \n");

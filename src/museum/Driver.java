@@ -9,11 +9,11 @@ public class Driver {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Museum m = new Museum(100, 100);
+		Museum m = new Museum(10, 10);
 		TicketSystem ts = new TicketSystem(m);
 		Ticketing t = new Ticketing(m, ts);
 		
-		Thread [] th = new Thread[40];
+		Thread [] th = new Thread[20];
 		for (int i = 0; i < th.length; i++) {
 			th[i] = new Thread(new Ticketing(m, ts));
 		}

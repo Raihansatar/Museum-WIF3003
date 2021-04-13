@@ -15,7 +15,7 @@ public class TicketSystem {
 		this.museum = museum;
 	}
 	
-	public synchronized Ticket[] buyTicket() {
+	public synchronized Ticket[] buyTicket() { // for better visual in console only, actually no need to synchronized
 		System.out.print(Thread.currentThread().getName() + " - How may ticket you want to buy? : \n");
 		return buy(scan.nextInt());
 	}
