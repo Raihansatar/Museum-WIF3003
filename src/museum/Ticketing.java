@@ -20,21 +20,20 @@ public class Ticketing implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-//		this.t = museum.buyTicket(rand.nextInt(2) + 1); // array of tickets
+		
 //			System.out.print(Thread.currentThread().getName() + " - How may ticket you want to buy? : \n");
 //			this.t = buy(scan.nextInt());			
-		this.t = buy(rand.nextInt(2) + 1); // array of tickets
-//		 this.t = ticketSystem.buyTicket();
+		
+		this.t = buy(rand.nextInt(4) + 1); // array of tickets
+
+//		this.t = ticketSystem.buyTicket();
 		
 		
 		if(this.t != null) {
 			Thread [] th = new Thread[t.length];
-//			System.out.println("Length " + t.length);
 			for (int i = 0; i < t.length; i++) {
-//				System.out.println("ID: -- " + t[i].getID());
 				th[i] = new Thread(new Visitor(museum, t[i]));
 			}
-//			
 			for (int i = 0; i < t.length; i++) {
 				th[i].start();
 			}

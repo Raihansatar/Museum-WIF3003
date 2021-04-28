@@ -4,6 +4,7 @@ public class Ticket {
 
 	private double timestamp;
 	private int ID;
+	String TicketID;
 	public Ticket(int ID) {
 		// TODO Auto-generated constructor stub
 		this.setTimestamp(System.currentTimeMillis());
@@ -15,11 +16,13 @@ public class Ticket {
 	public void setTimestamp(double timestamp) {
 		this.timestamp = timestamp;
 	}
-	public int getID() {
-		return ID;
+	public String getID() {
+		
+		return TicketID;
 	}
 	public void setID(int iD) {
 		ID = iD;
+		TicketID = String.format("T%05d", ID);
 	}
 
 }

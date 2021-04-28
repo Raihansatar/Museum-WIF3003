@@ -27,7 +27,7 @@ public class Museum {
 		// TODO Auto-generated constructor stub
 		this.visitor = 0;
 		this.maxVisitor = maxVisitor;
-		this.ticket = 0;
+		this.ticket = 1;
 		this.totalTicket = totalTicket;
 	}
 	
@@ -57,7 +57,7 @@ public class Museum {
 		// sleep
 		visitor++;
 		System.out.print(dateFormat.format(new Date()) + " - ");
-		System.out.print("T00" + t.getID() + " entering through Turnsile SET"+ turnstiles +". Staying for " + staying + " minutes  \n");
+		System.out.print(t.getID() + " entering through Turnsile SET"+ turnstiles +". Staying for " + staying + " minutes  \n");
 		SET[turnstiles] = false;
 				
 		notifyAll();
@@ -87,7 +87,7 @@ public class Museum {
 		
 		visitor++;
 		System.out.print(dateFormat.format(new Date()) + " - ");
-		System.out.print("T00" + t.getID() + " entering through Turnsile NET"+turnstiles+". Staying for " + staying + " minutes \n");
+		System.out.print(t.getID() + " entering through Turnsile NET"+turnstiles+". Staying for " + staying + " minutes \n");
 		
 		NET[turnstiles] = false;
 		notifyAll();
@@ -108,7 +108,7 @@ public class Museum {
 		
 		visitor--;
 		System.out.print(dateFormat.format(new Date()) + " - ");
-		System.out.print("Ticket T00" + ticket.getID() + " exited through Turnstile EET" + turnstiles);
+		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EET" + turnstiles);
 		System.out.println("  Total Visitor: " + this.visitor);
 		EET[turnstiles] = false;
 		
@@ -130,7 +130,7 @@ public class Museum {
 		
 		visitor--;
 		System.out.print(dateFormat.format(new Date()) + " - ");
-		System.out.print("Ticket T00" + ticket.getID() + " exited through Turnstile EWT" + turnstiles);
+		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EWT" + turnstiles);
 		System.out.println("  Total Visitor: " + this.visitor);
 		WET[turnstiles] = false;
 		
@@ -153,8 +153,8 @@ public class Museum {
 			System.out.print(dateFormat.format(new Date()) + " - ");
 			for (int i = 0; i < number; i++) {
 				
-				System.out.print("T00" + this.ticket + " ");
 				ticket[i] = new Ticket(this.ticket);
+				System.out.print(ticket[i].getID() + " ");
 				this.ticket++;
 			}
 			System.out.println("SOLD");

@@ -11,9 +11,8 @@ public class Driver {
 		
 		Museum m = new Museum(10, 10);
 		TicketSystem ts = new TicketSystem(m);
-		Ticketing t = new Ticketing(m, ts);
 		
-		Thread [] th = new Thread[20];
+		Thread [] th = new Thread[5]; //number of person buying ticket
 		for (int i = 0; i < th.length; i++) {
 			th[i] = new Thread(new Ticketing(m, ts));
 		}
