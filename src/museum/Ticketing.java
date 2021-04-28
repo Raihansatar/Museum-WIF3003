@@ -11,23 +11,21 @@ public class Ticketing implements Runnable{
 	Random rand  = new Random();
 	Scanner scan = new Scanner(System.in);
 	
-	public Ticketing(Museum museum, TicketSystem ticketSystem) {
+	public Ticketing(Museum museum) {
 		// TODO Auto-generated constructor stub
 		this.museum = museum;
-		this.ticketSystem = ticketSystem;
+		this.ticketSystem = new TicketSystem(museum);
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		
-//			System.out.print(Thread.currentThread().getName() + " - How may ticket you want to buy? : \n");
-//			this.t = buy(scan.nextInt());			
+		this.t = ticketSystem.buy(rand.nextInt(4) + 1);
+		//	uncomment for automate random number of ticket buy
 		
-		this.t = buy(rand.nextInt(4) + 1); // array of tickets
-
-//		this.t = ticketSystem.buyTicket();
-		
+		//	this.t = ticketSystem.buyTicket(); 
+		//	uncomment for manual number of ticket buy
 		
 		if(this.t != null) {
 			Thread [] th = new Thread[t.length];
@@ -40,12 +38,5 @@ public class Ticketing implements Runnable{
 		}
 		
 	}
-	
-	public Ticket[] buy(int number) {
-		Ticket []ticket = museum.buyTicket(number);
-		return ticket;
-	}
-	
-	
 
 }

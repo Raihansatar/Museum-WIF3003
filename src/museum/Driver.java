@@ -10,11 +10,13 @@ public class Driver {
 		// TODO Auto-generated method stub
 		
 		Museum m = new Museum(10, 10);
-		TicketSystem ts = new TicketSystem(m);
+		//	create museum object with parameter ( maxVisitor, total ticket available)
 		
-		Thread [] th = new Thread[5]; //number of person buying ticket
+		Thread [] th = new Thread[5]; //define number of person buying ticket
+		
+		// create thread of person that buying the ticket and start
 		for (int i = 0; i < th.length; i++) {
-			th[i] = new Thread(new Ticketing(m, ts));
+			th[i] = new Thread(new Ticketing(m));
 		}
 		
 		for (int i = 0; i < th.length; i++) {
