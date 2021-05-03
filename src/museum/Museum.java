@@ -22,7 +22,7 @@ public class Museum {
 	protected boolean[] WET = {false, false, false, false};
 	
 	Random rand = new Random();
-        private Timer timer;
+    private Timer timer;
 	
 	public Museum(int maxVisitor ,int totalTicket, Timer timer) {
 		// TODO Auto-generated constructor stub
@@ -30,17 +30,12 @@ public class Museum {
 		this.maxVisitor = maxVisitor;
 		this.ticket = 1;
 		this.totalTicket = totalTicket;
-                this.timer = timer;
+        this.timer = timer;
 	}
 	
 	// enter south gate
 	public synchronized void enterSouth(Ticket t, int staying) {
                 
-                //check if before 9:00am
-                while(timer.getTime()<32400){
-                        System.out.println("Time is "+timer.toString()+", mueseum not opened yet");
-                        
-                }
                 
 		while(this.visitor > this.maxVisitor) { // check if current visitor more that max visitor allowed in the museum
 			try {
@@ -66,11 +61,18 @@ public class Museum {
 		SET[turnstiles] = true; // set turnstile to true (in use)
 		
 		// write code here to set Thread.sleep(seconds) to visualize turnstiles in used
+//		Thread.currentThread();
+//		try {
+//			Thread.sleep(1000); // turnstile in used for 1 seconds
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		visitor++; // increase the number of visitor in museum
 //		System.out.print(dateFormat.format(new Date()) + " - ");
-                System.out.print(timer.toString() + " - ");
-		System.out.print(t.getID() + " entering through Turnsile SET"+ turnstiles +". Staying for " + staying + " minutes  \n");
+        System.out.print(timer.toString() + " - ");
+		System.out.print(t.getID() + " with time " + t.getTicketTime()+ "  entering through Turnsile SET"+ turnstiles +". Staying for " + staying + " minutes  \n");
 		SET[turnstiles] = false; // set turnstile to free
 				
 		notifyAll();
@@ -78,12 +80,6 @@ public class Museum {
 	
 	// same with above
 	public synchronized void enterNorth(Ticket t, int staying) {
-                
-                //check if before 9:00am
-                while(timer.getTime()<32400){
-                        System.out.println("Time is "+timer.toString()+", mueseum not opened yet");
-                        
-                }
                 
 		while(this.visitor > this.maxVisitor) {
 			try {
@@ -105,11 +101,19 @@ public class Museum {
 			}
 		}
 		NET[turnstiles] = true;
+		// write code here to set Thread.sleep(seconds) to visualize turnstiles in used
+//		Thread.currentThread();
+//		try {
+//			Thread.sleep(1000); // turnstile in used for 1 seconds
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		visitor++;
 		//System.out.print(dateFormat.format(new Date()) + " - ");
-                System.out.print(timer.toString() + " - ");
-		System.out.print(t.getID() + " entering through Turnsile NET"+turnstiles+". Staying for " + staying + " minutes \n");
+        System.out.print(timer.toString() + " - ");
+		System.out.print(t.getID() + " with time " + t.getTicketTime()+ " entering through Turnsile NET"+turnstiles+". Staying for " + staying + " minutes \n");
 		
 		NET[turnstiles] = false;
 		notifyAll();
@@ -131,7 +135,7 @@ public class Museum {
 		
 		visitor--;
 		//System.out.print(dateFormat.format(new Date()) + " - ");
-                System.out.print(timer.toString() + " - ");
+        System.out.print(timer.toString() + " - ");
 		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EET" + turnstiles);
 		System.out.println("  Total Visitor: " + this.visitor);
 		EET[turnstiles] = false;
@@ -155,7 +159,7 @@ public class Museum {
 		
 		visitor--;
 		//System.out.print(dateFormat.format(new Date()) + " - ");
-                System.out.print(timer.toString() + " - ");
+        System.out.print(timer.toString() + " - ");
 		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EWT" + turnstiles);
 		System.out.println("  Total Visitor: " + this.visitor);
 		WET[turnstiles] = false;
@@ -163,12 +167,12 @@ public class Museum {
 		notifyAll();
 	}
 
-	public synchronized Ticket[] buyTicket(int number) {
+	public synchronized Ticket[] buyTicket(int number, int timeEnter) {
                 
-                //check if between 8:00am and 5:00pm
-                while(timer.getTime()<28800 || timer.getTime()>61200){
-                    System.out.println("Time is "+timer.toString()+", ticket counter not open");
-                }
+        //check if between 8:00am and 5:00pm
+        while(timer.getTime()<28800 || timer.getTime()>61200){
+            System.out.println("Time is "+timer.toString()+", ticket counter not open");
+        }
                 
 		if(ticket > this.totalTicket) { // check if ticket still available
 			try {
@@ -182,15 +186,19 @@ public class Museum {
 		}else {
 			Ticket[] ticket = new Ticket[number]; // set array of number of tickets
 			//System.out.print(dateFormat.format(new Date()) + " - ");
-                        System.out.print(timer.toString() + " - ");
+            System.out.print(timer.toString() + " - ");
 			for (int i = 0; i < number; i++) {
 				
-				ticket[i] = new Ticket(this.ticket); // create object ticket
+				ticket[i] = new Ticket(this.ticket, timeEnter); // create object ticket
 				System.out.print(ticket[i].getID() + " ");
 				this.ticket++; // basically this is decrease number of the tickets available in the museum
 			}
 			System.out.println("SOLD");
 			return ticket;
 		}
+	}
+
+	public Timer getTimer() {
+		return this.timer;
 	}
 }

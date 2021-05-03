@@ -1,22 +1,26 @@
 
 package museum;
 
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Timer implements Runnable{
-    private long timer;
+//    private long timer;
+    AtomicInteger timer;
     
     public Timer(){
         //timer starts at 7:00am
-        this.timer=25200;
+//        this.timer=25200;
+    	timer = new AtomicInteger(25200);
     }
     
     public void run(){
         
         //Stops by 6:30pm
-        while(timer<=67800){
+        while(timer.get()<=67800){
             try{
                 Thread.sleep(50);
-                timer=timer+30;
+//                timer=timer+30;
+                timer.addAndGet(30);
                 
             }catch(InterruptedException e){
                 e.printStackTrace();
@@ -25,11 +29,12 @@ public class Timer implements Runnable{
     }
     
     public long getTime(){
-        return timer;
+//        return timer;
+        return timer.get();
     }
     
     public String toString(){
-        int hour =(int) timer/60;
+        int hour =(int) timer.get()/60;
         int min = (int) hour % 60;
         hour = hour/60;
         if(min < 10){

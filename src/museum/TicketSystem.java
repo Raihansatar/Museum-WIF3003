@@ -17,12 +17,15 @@ public class TicketSystem {
 	
 	public Ticket[] buyTicket() {
 		System.out.print(Thread.currentThread().getName() + " - How may ticket you want to buy? : \n");
-		Ticket []ticket = buy(scan.nextInt());
+//		int timeEnter = rand.nextInt(61200 - 32400) + 32400;
+		int timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + museum.getTimer().getTime());
+
+		Ticket []ticket = buy(scan.nextInt(), timeEnter);
 		return ticket;
 	}
 	
-	public Ticket[] buy(int number) {
-		Ticket []ticket = museum.buyTicket(number);
+	public Ticket[] buy(int number, int timeEnter) {
+		Ticket []ticket = museum.buyTicket(number, timeEnter);
 		return ticket;
 	}
 

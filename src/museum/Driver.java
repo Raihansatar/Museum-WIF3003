@@ -1,5 +1,7 @@
 package museum;
 
+import java.util.Random;
+
 public class Driver {
 
 	public Driver() {
@@ -8,11 +10,16 @@ public class Driver {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Random rand = new Random();
+		Timer timer = new Timer();
+    	Thread tt = new Thread(timer);
+    	tt.setName("Timer thread");
+    	tt.start();
+        
+		Museum m = new Museum(30, 100, timer);
+		//	create museum object with parameter ( maxVisitor, total ticket available, timer thread)
 		
-		Museum m = new Museum(10, 10);
-		//	create museum object with parameter ( maxVisitor, total ticket available)
-		
-		Thread [] th = new Thread[5]; //define number of person buying ticket
+		Thread [] th = new Thread[50]; //define number of person buying ticket
 		
 		// create thread of person that buying the ticket and start
 		for (int i = 0; i < th.length; i++) {
@@ -21,7 +28,7 @@ public class Driver {
 		
 		for (int i = 0; i < th.length; i++) {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(rand.nextInt(2400) + 600);
 			} catch (Exception e) {
 				// TODO: handle exception
 			}

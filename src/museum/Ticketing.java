@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Ticketing implements Runnable{
-
+// process of buy ticket and create visitor based on the number of ticket
 	protected Museum museum;
 	protected Ticket t[];
 	protected TicketSystem ticketSystem;
@@ -21,7 +21,12 @@ public class Ticketing implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		
-		this.t = ticketSystem.buy(rand.nextInt(4) + 1);
+//		int timeEnter = rand.nextInt(67800 - 32400) + 32400;
+//		int timeEnter = rand.nextInt(36000 - 32400) + 32400;
+		int timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + museum.getTimer().getTime());
+		
+		//generate same entering time per who buy ticket
+		this.t = ticketSystem.buy(rand.nextInt(4) + 1, timeEnter);
 		//	uncomment for automate random number of ticket buy
 		
 		//	this.t = ticketSystem.buyTicket(); 
