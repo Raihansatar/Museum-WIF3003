@@ -22,17 +22,26 @@ public class Museum {
 	protected boolean[] WET = {false, false, false, false};
 	
 	Random rand = new Random();
+        private Timer timer;
 	
-	public Museum(int maxVisitor ,int totalTicket) {
+	public Museum(int maxVisitor ,int totalTicket, Timer timer) {
 		// TODO Auto-generated constructor stub
 		this.visitor = 0;
 		this.maxVisitor = maxVisitor;
 		this.ticket = 1;
 		this.totalTicket = totalTicket;
+                this.timer = timer;
 	}
 	
 	// enter south gate
 	public synchronized void enterSouth(Ticket t, int staying) {
+                
+                //check if before 9:00am
+                while(timer.getTime()<32400){
+                        System.out.println("Time is "+timer.toString()+", mueseum not opened yet");
+                        
+                }
+                
 		while(this.visitor > this.maxVisitor) { // check if current visitor more that max visitor allowed in the museum
 			try {
 				System.out.println("Waiting... Museum exceed limit");
@@ -59,7 +68,8 @@ public class Museum {
 		// write code here to set Thread.sleep(seconds) to visualize turnstiles in used
 		
 		visitor++; // increase the number of visitor in museum
-		System.out.print(dateFormat.format(new Date()) + " - ");
+//		System.out.print(dateFormat.format(new Date()) + " - ");
+                System.out.print(timer.toString() + " - ");
 		System.out.print(t.getID() + " entering through Turnsile SET"+ turnstiles +". Staying for " + staying + " minutes  \n");
 		SET[turnstiles] = false; // set turnstile to free
 				
@@ -68,6 +78,13 @@ public class Museum {
 	
 	// same with above
 	public synchronized void enterNorth(Ticket t, int staying) {
+                
+                //check if before 9:00am
+                while(timer.getTime()<32400){
+                        System.out.println("Time is "+timer.toString()+", mueseum not opened yet");
+                        
+                }
+                
 		while(this.visitor > this.maxVisitor) {
 			try {
 				System.out.println("Waiting... Museum exceed limit");
@@ -90,7 +107,8 @@ public class Museum {
 		NET[turnstiles] = true;
 		
 		visitor++;
-		System.out.print(dateFormat.format(new Date()) + " - ");
+		//System.out.print(dateFormat.format(new Date()) + " - ");
+                System.out.print(timer.toString() + " - ");
 		System.out.print(t.getID() + " entering through Turnsile NET"+turnstiles+". Staying for " + staying + " minutes \n");
 		
 		NET[turnstiles] = false;
@@ -112,7 +130,8 @@ public class Museum {
 		EET[turnstiles] = true;
 		
 		visitor--;
-		System.out.print(dateFormat.format(new Date()) + " - ");
+		//System.out.print(dateFormat.format(new Date()) + " - ");
+                System.out.print(timer.toString() + " - ");
 		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EET" + turnstiles);
 		System.out.println("  Total Visitor: " + this.visitor);
 		EET[turnstiles] = false;
@@ -135,7 +154,8 @@ public class Museum {
 		WET[turnstiles] = true;
 		
 		visitor--;
-		System.out.print(dateFormat.format(new Date()) + " - ");
+		//System.out.print(dateFormat.format(new Date()) + " - ");
+                System.out.print(timer.toString() + " - ");
 		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EWT" + turnstiles);
 		System.out.println("  Total Visitor: " + this.visitor);
 		WET[turnstiles] = false;
@@ -144,7 +164,12 @@ public class Museum {
 	}
 
 	public synchronized Ticket[] buyTicket(int number) {
-
+                
+                //check if between 8:00am and 5:00pm
+                while(timer.getTime()<28800 || timer.getTime()>61200){
+                    System.out.println("Time is "+timer.toString()+", ticket counter not open");
+                }
+                
 		if(ticket > this.totalTicket) { // check if ticket still available
 			try {
 				System.out.println("Out of ticket." + Thread.currentThread().getName());
@@ -156,7 +181,8 @@ public class Museum {
 			return null; // for error handling
 		}else {
 			Ticket[] ticket = new Ticket[number]; // set array of number of tickets
-			System.out.print(dateFormat.format(new Date()) + " - ");
+			//System.out.print(dateFormat.format(new Date()) + " - ");
+                        System.out.print(timer.toString() + " - ");
 			for (int i = 0; i < number; i++) {
 				
 				ticket[i] = new Ticket(this.ticket); // create object ticket
