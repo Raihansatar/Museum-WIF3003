@@ -29,13 +29,17 @@ public class Ticketing implements Runnable{
 		this.t = ticketSystem.buy(rand.nextInt(4) + 1, timeEnter);
 		//	uncomment for automate random number of ticket buy
 		
-		//	this.t = ticketSystem.buyTicket(); 
+			//this.t = ticketSystem.buyTicket(); 
 		//	uncomment for manual number of ticket buy
 		
 		if(this.t != null) {
 			Thread [] th = new Thread[t.length];
+                        
+                        //Set same entrance for ticket groups
+                        int entrance = rand.nextInt(2);
+                        
 			for (int i = 0; i < t.length; i++) {
-				th[i] = new Thread(new Visitor(museum, t[i]));
+				th[i] = new Thread(new Visitor(museum, t[i], entrance));
 			}
 			for (int i = 0; i < t.length; i++) {
 				th[i].start();
