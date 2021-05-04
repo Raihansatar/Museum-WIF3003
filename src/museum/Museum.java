@@ -22,7 +22,7 @@ public class Museum {
 	protected boolean[] WET = {false, false, false, false};
 	
 	Random rand = new Random();
-    private Timer timer;
+        private Timer timer;
 	
 	public Museum(int maxVisitor ,int totalTicket, Timer timer) {
 		// TODO Auto-generated constructor stub
@@ -70,8 +70,7 @@ public class Museum {
 //		}
 		
 		visitor++; // increase the number of visitor in museum
-//		System.out.print(dateFormat.format(new Date()) + " - ");
-        System.out.print(timer.toString() + " - ");
+                System.out.print(timer.toString() + " - ");
 		System.out.print(t.getID() + " with time " + t.getTicketTime()+ "  entering through Turnsile SET"+ turnstiles +". Staying for " + staying + " minutes  \n");
 		SET[turnstiles] = false; // set turnstile to free
 				
@@ -82,23 +81,23 @@ public class Museum {
 	public synchronized void enterNorth(Ticket t, int staying) {
                 
 		while(this.visitor > this.maxVisitor) {
-			try {
-				System.out.println("Waiting... Museum exceed limit");
-				wait();
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
+                    try {
+                            System.out.println("Waiting... Museum exceed limit");
+                            wait();
+                    } catch (Exception e) {
+                            // TODO: handle exception
+                            e.printStackTrace();
+                    }
 		}
 		
 		int turnstiles = rand.nextInt(4);
 		while(NET[turnstiles] == true) {
-			try {
-				System.out.println("Waiting... Queue turnstiles NET" + turnstiles);
-				wait();
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+                    try {
+                            System.out.println("Waiting... Queue turnstiles NET" + turnstiles);
+                            wait();
+                    } catch (Exception e) {
+                            // TODO: handle exception
+                    }
 		}
 		NET[turnstiles] = true;
 		// write code here to set Thread.sleep(seconds) to visualize turnstiles in used
@@ -111,8 +110,7 @@ public class Museum {
 //		}
 		
 		visitor++;
-		//System.out.print(dateFormat.format(new Date()) + " - ");
-        System.out.print(timer.toString() + " - ");
+                System.out.print(timer.toString() + " - ");
 		System.out.print(t.getID() + " with time " + t.getTicketTime()+ " entering through Turnsile NET"+turnstiles+". Staying for " + staying + " minutes \n");
 		
 		NET[turnstiles] = false;
@@ -134,8 +132,7 @@ public class Museum {
 		EET[turnstiles] = true;
 		
 		visitor--;
-		//System.out.print(dateFormat.format(new Date()) + " - ");
-        System.out.print(timer.toString() + " - ");
+                System.out.print(timer.toString() + " - ");
 		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EET" + turnstiles);
 		System.out.println("  Total Visitor: " + this.visitor);
 		EET[turnstiles] = false;
@@ -169,10 +166,10 @@ public class Museum {
 
 	public synchronized Ticket[] buyTicket(int number, int timeEnter) {
                 
-        //check if between 8:00am and 5:00pm
-        while(timer.getTime()<28800 || timer.getTime()>61200){
-            System.out.println("Time is "+timer.toString()+", ticket counter not open");
-        }
+                //check if between 8:00am and 5:00pm
+                while(timer.getTime()<28800 || timer.getTime()>61200){
+                    System.out.println("Time is "+timer.toString()+", ticket counter not open");
+                }
                 
 		if(ticket > this.totalTicket) { // check if ticket still available
 			try {
@@ -186,7 +183,7 @@ public class Museum {
 		}else {
 			Ticket[] ticket = new Ticket[number]; // set array of number of tickets
 			//System.out.print(dateFormat.format(new Date()) + " - ");
-            System.out.print(timer.toString() + " - ");
+                        System.out.print(timer.toString() + " - ");
 			for (int i = 0; i < number; i++) {
 				
 				ticket[i] = new Ticket(this.ticket, timeEnter); // create object ticket
