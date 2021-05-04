@@ -51,7 +51,7 @@ public class Museum {
 		
 		while(SET[turnstiles] == true) { // if true means that turnstile is currently in used
 			try {
-				System.out.println("Waiting... Queue turnstiles SET" + turnstiles);
+				System.out.println("Waiting... Queue turnstiles SET" + (turnstiles + 1));
 				wait(); // wait until turnstile is not in use
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -63,7 +63,7 @@ public class Museum {
 		
 		visitor++; // increase the number of visitor in museum
                 System.out.print(timer.toString() + " - ");
-		System.out.print(t.getID() + " with time " + t.getTicketTime()+ "  entering through Turnsile SET"+ turnstiles +". Staying for " + staying + " minutes  \n");
+		System.out.print(t.getID() + " with time " + t.getTicketTime()+ "  entering through Turnsile SET"+ (turnstiles + 1) +". Staying for " + staying + " minutes  \n");
 		SET[turnstiles] = false; // set turnstile to free
 				
 		notifyAll();
@@ -85,7 +85,7 @@ public class Museum {
 		int turnstiles = rand.nextInt(4);
 		while(NET[turnstiles] == true) {
 	        try {
-	            System.out.println("Waiting... Queue turnstiles NET" + turnstiles);
+	            System.out.println("Waiting... Queue turnstiles NET" + (turnstiles + 1));
 	            wait();
 	        } catch (Exception e) {
                 // TODO: handle exception
@@ -95,7 +95,7 @@ public class Museum {
 		
 		visitor++;
                 System.out.print(timer.toString() + " - ");
-		System.out.print(t.getID() + " with time " + t.getTicketTime()+ " entering through Turnsile NET"+turnstiles+". Staying for " + staying + " minutes \n");
+		System.out.print(t.getID() + " with time " + t.getTicketTime()+ " entering through Turnsile NET"+(turnstiles + 1) +". Staying for " + staying + " minutes \n");
 		
 		NET[turnstiles] = false;
 		notifyAll();
@@ -107,7 +107,7 @@ public class Museum {
 		
 		while(EET[turnstiles] == true) {
 			try {
-				System.out.println("Waiting... Queue turnstiles EET" + turnstiles);
+				System.out.println("Waiting... Queue turnstiles EET" + (turnstiles + 1) );
 				wait();
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -118,7 +118,7 @@ public class Museum {
 		
 		visitor--;
                 System.out.print(timer.toString() + " - ");
-		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EET" + turnstiles);
+		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EET" + (turnstiles + 1));
 		System.out.println("  Total Visitor: " + this.visitor);
 		EET[turnstiles] = false;
 		
@@ -130,7 +130,7 @@ public class Museum {
 		int turnstiles = rand.nextInt(4);
 		while(WET[turnstiles] == true) {
 			try {
-				System.out.println("Waiting... Queue turnstiles EET" + turnstiles);
+				System.out.println("Waiting... Queue turnstiles EET" + (turnstiles + 1));
 				wait();
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -142,7 +142,7 @@ public class Museum {
 		visitor--;
 		//System.out.print(dateFormat.format(new Date()) + " - ");
         System.out.print(timer.toString() + " - ");
-		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EWT" + turnstiles);
+		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EWT" + (turnstiles + 1));
 		System.out.println("  Total Visitor: " + this.visitor);
 		WET[turnstiles] = false;
 		
