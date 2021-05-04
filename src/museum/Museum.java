@@ -60,14 +60,6 @@ public class Museum {
 		}
 		SET[turnstiles] = true; // set turnstile to true (in use)
 		
-		// write code here to set Thread.sleep(seconds) to visualize turnstiles in used
-//		Thread.currentThread();
-//		try {
-//			Thread.sleep(1000); // turnstile in used for 1 seconds
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		
 		visitor++; // increase the number of visitor in museum
                 System.out.print(timer.toString() + " - ");
@@ -81,13 +73,13 @@ public class Museum {
 	public synchronized void enterNorth(Ticket t, int staying) {
                 
 		while(this.visitor > this.maxVisitor) {
-                    try {
-                            System.out.println("Waiting... Museum exceed limit");
-                            wait();
-                    } catch (Exception e) {
-                            // TODO: handle exception
-                            e.printStackTrace();
-                    }
+            try {
+                System.out.println("Waiting... Museum exceed limit");
+                wait();
+            } catch (Exception e) {
+                // TODO: handle exception
+                e.printStackTrace();
+            }
 		}
 		
 		int turnstiles = rand.nextInt(4);
@@ -100,14 +92,6 @@ public class Museum {
                     }
 		}
 		NET[turnstiles] = true;
-		// write code here to set Thread.sleep(seconds) to visualize turnstiles in used
-//		Thread.currentThread();
-//		try {
-//			Thread.sleep(1000); // turnstile in used for 1 seconds
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		
 		visitor++;
                 System.out.print(timer.toString() + " - ");
@@ -166,14 +150,22 @@ public class Museum {
 
 	public synchronized Ticket[] buyTicket(int number, int timeEnter) {
                 
-                //check if between 8:00am and 5:00pm
-                while(timer.getTime()<28800 || timer.getTime()>61200){
-                    System.out.println("Time is "+timer.toString()+", ticket counter not open");
-                }
-                
+        //check if between 8:00am and 5:00pm
+        while(timer.getTime()<28800 || timer.getTime()>61200){
+            System.out.println("Time is "+timer.toString()+", ticket counter not open");
+        }
+        
+//        try {
+//        	Thread t = Thread.currentThread();
+//			t.sleep(rand.nextInt(2400) + 600);
+//		} catch (InterruptedException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+        
 		if(ticket > this.totalTicket) { // check if ticket still available
 			try {
-				System.out.println("Out of ticket." + Thread.currentThread().getName());
+				System.out.println(timer.toString() + " - Sorry, out of ticket. " + Thread.currentThread().getName());
 				Thread.currentThread().interrupt(); // end the thread since out of ticket
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -182,12 +174,11 @@ public class Museum {
 			return null; // for error handling
 		}else {
 			Ticket[] ticket = new Ticket[number]; // set array of number of tickets
-			//System.out.print(dateFormat.format(new Date()) + " - ");
-                        System.out.print(timer.toString() + " - ");
+            System.out.print(timer.toString() + " - ");
 			for (int i = 0; i < number; i++) {
 				
 				ticket[i] = new Ticket(this.ticket, timeEnter); // create object ticket
-				System.out.print(ticket[i].getID() + " ");
+				System.out.print(ticket[i].getID() + " (" + ticket[i].getTicketTime() +  ") ");
 				this.ticket++; // basically this is decrease number of the tickets available in the museum
 			}
 			System.out.println("SOLD");

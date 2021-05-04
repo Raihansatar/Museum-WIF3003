@@ -7,18 +7,15 @@ public class Ticket {
 	String TicketID;
 	public Ticket(int ID, int timeEnter) {
             // TODO Auto-generated constructor stub
-            this.setID(ID); // set id ticket
-            this.timeEnter = timeEnter;
-            System.out.print(" time - " + getTicketTime() + " ");
+        this.setID(ID); // set id ticket
+        this.timeEnter = timeEnter;
+//        System.out.print(" time - " + getTicketTime() + " ");
 	}
 	
 	public int getTimestamp() {
 		return timeEnter;
 	}
 	
-//	public void setTimestamp(int timestamp) {
-//            this.timeEnter = timestamp;
-//	}
 	
 	public String getID() {
 		
