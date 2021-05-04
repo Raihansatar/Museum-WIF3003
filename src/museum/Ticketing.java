@@ -21,25 +21,24 @@ public class Ticketing implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		
-//		int timeEnter = rand.nextInt(67800 - 32400) + 32400;
-//		int timeEnter = rand.nextInt(36000 - 32400) + 32400;
 		int timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + museum.getTimer().getTime());
 		
 		//generate same entering time per who buy ticket
 		this.t = ticketSystem.buy(rand.nextInt(4) + 1, timeEnter);
 		//	uncomment for automate random number of ticket buy
 		
-			//this.t = ticketSystem.buyTicket(); 
+//		this.t = ticketSystem.buyTicket();
 		//	uncomment for manual number of ticket buy
 		
 		if(this.t != null) {
 			Thread [] th = new Thread[t.length];
                         
-                        //Set same entrance for ticket groups
-                        int entrance = rand.nextInt(2);
+            //Set same entrance for ticket groups
+            int entrance = rand.nextInt(2);
+            int staying = rand.nextInt(9000)+ 3000;
                         
 			for (int i = 0; i < t.length; i++) {
-				th[i] = new Thread(new Visitor(museum, t[i], entrance));
+				th[i] = new Thread(new Visitor(museum, t[i], entrance, staying));
 			}
 			for (int i = 0; i < t.length; i++) {
 				th[i].start();

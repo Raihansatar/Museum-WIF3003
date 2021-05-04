@@ -17,10 +17,9 @@ public class TicketSystem {
 	
 	public Ticket[] buyTicket() {
 		System.out.print(Thread.currentThread().getName() + " - How may ticket you want to buy? : \n");
-//		int timeEnter = rand.nextInt(61200 - 32400) + 32400;
+		int number = scan.nextInt();
 		int timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + museum.getTimer().getTime());
-
-		Ticket []ticket = buy(scan.nextInt(), timeEnter);
+		Ticket []ticket = buy(number, timeEnter);
 		return ticket;
 	}
 	

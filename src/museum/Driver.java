@@ -18,7 +18,6 @@ public class Driver {
             System.out.println("Enter start time in minutes: ");
             int minutes = scan.nextInt();
             
-            
             Timer timer = new Timer(hours, minutes);
             Thread tt = new Thread(timer);
             tt.setName("Timer thread");
@@ -29,24 +28,29 @@ public class Driver {
             System.out.println("Enter maximum number of tickets: ");
             int totalTickets = scan.nextInt();
             
+            System.out.println("Enter thread for buying ticket: ");
+            int ticketThread = scan.nextInt();
+            
             Museum m = new Museum(maxVisitors, totalTickets, timer);
             //	create museum object with parameter ( maxVisitor, total ticket available, timer thread)
 
-            Thread [] th = new Thread[50]; //define number of person buying ticket
+            Thread [] th = new Thread[ticketThread]; //define number of person buying ticket
 
             // create thread of person that buying the ticket and start
             for (int i = 0; i < th.length; i++) {
                     th[i] = new Thread(new Ticketing(m));
             }
+            
 
             for (int i = 0; i < th.length; i++) {
-                    try {
-                            Thread.sleep(rand.nextInt(2400) + 600);
-                    } catch (Exception e) {
-                            // TODO: handle exception
-                    }
-                    th[i].start();
+                try {
+                        Thread.sleep(rand.nextInt(2400) + 600);
+                } catch (Exception e) {
+                        // TODO: handle exception
+                }
+                th[i].start();
             }
+            
 	}
 
 }
