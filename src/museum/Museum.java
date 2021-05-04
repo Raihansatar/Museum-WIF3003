@@ -47,7 +47,7 @@ public class Museum {
 			}
 		}
 		
-		int turnstiles = rand.nextInt(4); // set random turnstiles for wisitors to enter the museum
+		int turnstiles = rand.nextInt(4) + 1; // set random turnstiles for wisitors to enter the museum
 		
 		while(SET[turnstiles] == true) { // if true means that turnstile is currently in used
 			try {
@@ -82,14 +82,14 @@ public class Museum {
             }
 		}
 		
-		int turnstiles = rand.nextInt(4);
+		int turnstiles = rand.nextInt(4) + 1;
 		while(NET[turnstiles] == true) {
-                    try {
-                            System.out.println("Waiting... Queue turnstiles NET" + turnstiles);
-                            wait();
-                    } catch (Exception e) {
-                            // TODO: handle exception
-                    }
+	        try {
+	            System.out.println("Waiting... Queue turnstiles NET" + turnstiles);
+	            wait();
+	        } catch (Exception e) {
+                // TODO: handle exception
+	        }
 		}
 		NET[turnstiles] = true;
 		
@@ -103,7 +103,8 @@ public class Museum {
 	
 	// same with above
 	public synchronized void exitEast(Ticket ticket) {
-		int turnstiles = rand.nextInt(4);
+		int turnstiles = rand.nextInt(4) + 1;
+		
 		while(EET[turnstiles] == true) {
 			try {
 				System.out.println("Waiting... Queue turnstiles EET" + turnstiles);
@@ -126,7 +127,7 @@ public class Museum {
 	
 	// same with above
 	public synchronized void exitWest(Ticket ticket) {
-		int turnstiles = rand.nextInt(4);
+		int turnstiles = rand.nextInt(4) + 1;
 		while(WET[turnstiles] == true) {
 			try {
 				System.out.println("Waiting... Queue turnstiles EET" + turnstiles);
@@ -154,14 +155,6 @@ public class Museum {
         while(timer.getTime()<28800 || timer.getTime()>61200){
             System.out.println("Time is "+timer.toString()+", ticket counter not open");
         }
-        
-//        try {
-//        	Thread t = Thread.currentThread();
-//			t.sleep(rand.nextInt(2400) + 600);
-//		} catch (InterruptedException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
         
 		if(ticket > this.totalTicket) { // check if ticket still available
 			try {
