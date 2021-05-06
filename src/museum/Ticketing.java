@@ -21,7 +21,13 @@ public class Ticketing implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		
-		int timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + museum.getTimer().getTime());
+		int timeEnter;
+		
+		if ((int)museum.getTimer().getTime() < 32400) {
+			timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + 32400);
+		} else {
+			timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + museum.getTimer().getTime());
+		}
 		
 		//generate same entering time per who buy ticket
 		this.t = ticketSystem.buy(rand.nextInt(4) + 1, timeEnter);
