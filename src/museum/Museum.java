@@ -140,8 +140,8 @@ public class Museum {
 		WET[turnstiles] = true;
 		
 		visitor--;
-		//System.out.print(dateFormat.format(new Date()) + " - ");
-        System.out.print(timer.toString() + " - ");
+	
+                System.out.print(timer.toString() + " - ");
 		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EWT" + (turnstiles + 1));
 		System.out.println("  Total Visitor: " + this.visitor);
 		WET[turnstiles] = false;

@@ -25,8 +25,7 @@ public class Visitor implements Runnable{
 		boolean enter = false;
 		while(museum.getTimer().getTime()<67800){
 			if(museum.getTimer().getTime()>32400){
-                //System.out.println("Time is "+ museum.getTimer().toString());
-//            }else {
+
 	            if(( this.ticket.getTimestamp() <= museum.getTimer().getTime() ) && enter == false ) {
 	
 	                if(entrance == 0){

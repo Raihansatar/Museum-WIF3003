@@ -9,7 +9,6 @@ public class Ticket {
             // TODO Auto-generated constructor stub
         this.setID(ID); // set id ticket
         this.timeEnter = timeEnter;
-//        System.out.print(" time - " + getTicketTime() + " ");
 	}
 	
 	public int getTimestamp() {

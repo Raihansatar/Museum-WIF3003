@@ -18,18 +18,18 @@ public class Driver {
             System.out.println("Enter start time in minutes: ");
             int minutes = scan.nextInt();
             
-            Timer timer = new Timer(hours, minutes);
-            Thread tt = new Thread(timer);
-            tt.setName("Timer thread");
-            tt.start();
-            
             System.out.println("Enter maximum number of visitors: ");
             int maxVisitors = scan.nextInt();
             System.out.println("Enter maximum number of tickets: ");
             int totalTickets = scan.nextInt();
             
-            System.out.println("Enter thread for buying ticket: ");
+            System.out.println("Enter number of people buying the tickets: ");
             int ticketThread = scan.nextInt();
+            
+            Timer timer = new Timer(hours, minutes);
+            Thread tt = new Thread(timer);
+            tt.setName("Timer thread");
+            tt.start();
             
             Museum m = new Museum(maxVisitors, totalTickets, timer);
             //	create museum object with parameter ( maxVisitor, total ticket available, timer thread)
