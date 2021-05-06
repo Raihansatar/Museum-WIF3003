@@ -41,7 +41,6 @@ public class Driver {
                     th[i] = new Thread(new Ticketing(m));
             }
             
-
             for (int i = 0; i < th.length; i++) {
                 try {
                         Thread.sleep(rand.nextInt(2400) + 600);

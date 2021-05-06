@@ -4,7 +4,6 @@ package museum;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Timer implements Runnable{
-//    private long timer;
     AtomicInteger timer;
     private int hour;
     private int minutes;
@@ -15,17 +14,17 @@ public class Timer implements Runnable{
         this.hour = hour*3600;
         this.minutes = minutes*60;
         this.startTimeInSec = this.hour + this.minutes;
-    	timer = new AtomicInteger(startTimeInSec);
+    	this.timer = new AtomicInteger(startTimeInSec);
     }
     
     public void run(){
         
         //Stops by 6:30pm
-        while(timer.get()<=67800){
+        while(timer.get()<=66600){
             try{
                 Thread.sleep(50);
                 timer.addAndGet(30);
-                if(timer.get() == 67800){
+                if(timer.get() == 64800){
                     System.out.println("Time is 6:00pm, museum is now closed");
                 }
                 
@@ -35,7 +34,7 @@ public class Timer implements Runnable{
         }
     }
     
-    public long getTime(){
+    public int getTime(){
         return timer.get();
     }
     
