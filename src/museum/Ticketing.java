@@ -2,6 +2,8 @@ package museum;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Ticketing implements Runnable{
 // process of buy ticket and create visitor based on the number of ticket
@@ -34,18 +36,18 @@ public class Ticketing implements Runnable{
 		
 		
 		if(this.t != null) {
-			Thread [] th = new Thread[t.length];
+			
+			ExecutorService pool = Executors.newFixedThreadPool(t.length);
                         
             //Set same entrance for ticket groups
             int entrance = rand.nextInt(2);
             int staying = rand.nextInt(9000)+ 3000;
                         
 			for (int i = 0; i < t.length; i++) {
-				th[i] = new Thread(new Visitor(museum, t[i], entrance, staying));
+				pool.execute(new Visitor(museum, t[i], entrance, staying));
 			}
-			for (int i = 0; i < t.length; i++) {
-				th[i].start();
-			}
+			
+			pool.shutdown();
 		}
 		
 	}
