@@ -25,6 +25,19 @@ public class Ticketing implements Runnable{
 		
 		int timeEnter;
 		
+		
+		boolean timerFlag = true;
+		while(true){
+			if(museum.getTimer().isCounterOpen()) {
+		      	break;
+			}
+		    if(timerFlag) {
+		    	System.out.println("Time is "+museum.getTimer().toString()+" ticket counter not open ["+Thread.currentThread().getName()+"]");
+		      	timerFlag=false;
+		    }
+		}
+		
+		
 		if ((int)museum.getTimer().getTime() < 32400) {
 			timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + 32400);
 		} else {

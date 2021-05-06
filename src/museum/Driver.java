@@ -45,10 +45,7 @@ public class Driver {
                 pool.execute(new Ticketing(museum));    
             }
             
-            pool.shutdown();
-            while(!pool.isTerminated()) {}
-//            System.out.println("Program Has Stopped");
-            
+            pool.shutdown();            
 
             
 	}

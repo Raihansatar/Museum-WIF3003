@@ -34,8 +34,11 @@ public class Timer implements Runnable{
         
         //Stops by 6:30pm
         while(timer.get()<=this.MuseumActuallyClose){
+        	if(timer.get() == this.CounterOpen) {
+        		System.out.println("Time is "+toString()+" Counter Is Open");
+        	}
         	if(timer.get() == this.MuseumClose){
-        		System.out.println("Time is 6:00pm, museum is now closed");
+        		System.out.println("Time is "+toString()+" Museum Is Now Closed");
         	}
             try{
                 Thread.sleep(this.threadSleep);
@@ -56,9 +59,9 @@ public class Timer implements Runnable{
     public boolean isCounterOpen() {
     	if(timer.get()>=this.CounterOpen && timer.get()<=this.CounterClose) {
 //    		System.out.println("Time is "+toString()+", ticket counter is not open");
-    		return false;
-    	}else {
     		return true;
+    	}else {
+    		return false;
     	}
     }
        
