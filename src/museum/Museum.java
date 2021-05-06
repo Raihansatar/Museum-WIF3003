@@ -150,29 +150,20 @@ public class Museum {
 
 	public synchronized Ticket[] buyTicket(int number, int timeEnter) {
                 
-        //check if between 8:00am and 5:00pm
-//		boolean timerFlag = true;
-//        while(true){
-//        	if(timer.isCounterOpen()) {
-//        		break;
-//        	}
-//        	if(timerFlag) {
-//        		System.out.println("Time is "+timer.toString()+", ticket counter not open");
-//        		timerFlag=false;
-//        	}
-//        }
-        
-		if(ticket > this.totalTicket) { // check if ticket still available
+		
+		// check if ticket still available
+		if(ticket > this.totalTicket) { 
 			try {
 				System.out.println(timer.toString() + " - Sorry, out of ticket. " + Thread.currentThread().getName());
-//				Thread.currentThread().interrupt(); // end the thread since out of ticket
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
 			return null; // for error handling
+		
+		// ticket is not available
 		}else {
-			Ticket[] ticket = new Ticket[number]; // set array of number of tickets
+			Ticket[] ticket = new Ticket[number]; 				// set array of number of tickets
             System.out.print(timer.toString() + " - ");
 			for (int i = 0; i < number; i++) {
 				
@@ -185,7 +176,10 @@ public class Museum {
 		}
 	}
 
+	
 	public Timer getTimer() {
 		return this.timer;
 	}
+	
+	
 }

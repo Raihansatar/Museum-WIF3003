@@ -37,19 +37,29 @@ public class Ticketing implements Runnable{
 		    }
 		}
 		
+		// what is this?
 		
-		if ((int)museum.getTimer().getTime() < 32400) {
+		//less then 9am
+		if ((int)museum.getTimer().getTime() < museum.getTimer().getMuseumOpeningTime()) {
+			
+			// random 5pm - get timer
 			timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + 32400);
+			
 		} else {
-			timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + museum.getTimer().getTime());
+			
+			do {
+				timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + museum.getTimer().getTime());				
+			}while(timeEnter < museum.getTimer().getMuseumClosingTime());
+			
 		}
+		
 		
 		//generate same entering time per who buy ticket
 		this.t = ticketSystem.buy(rand.nextInt(4) + 1, timeEnter);
 		
 		
 		if(this.t != null) {
-			
+	
 			ExecutorService pool = Executors.newFixedThreadPool(t.length);
                         
             //Set same entrance for ticket groups
