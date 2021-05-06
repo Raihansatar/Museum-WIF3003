@@ -24,6 +24,7 @@ public class TicketSystem {
 	}
 	
 	public Ticket[] buy(int number, int timeEnter) {
+        
 		Ticket []ticket = museum.buyTicket(number, timeEnter);
 		return ticket;
 	}

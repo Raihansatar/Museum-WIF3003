@@ -31,6 +31,11 @@ public class Ticketing implements Runnable{
 			}while(timeEnter<64800); //enter before museum closes
 		}
 		
+		//check if between 8:00am and 5:00pm
+        while(museum.getTimer().getTime()<28800 || museum.getTimer().getTime()>61200){
+            System.out.println("Time is "+museum.getTimer().toString()+", ticket counter not open");
+        }
+		
 		//generate same entering time per who buy ticket
 		this.t = ticketSystem.buy(rand.nextInt(4) + 1, timeEnter);
 		
