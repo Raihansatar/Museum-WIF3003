@@ -154,6 +154,9 @@ public class Museum {
         //check if between 8:00am and 5:00pm
         while(timer.getTime()<28800 || timer.getTime()>61200){
             System.out.println("Time is "+timer.toString()+", ticket counter not open");
+	    if(timer.getTime()>61200) {
+            	return null;
+            }
         }
         
 		if(ticket > this.totalTicket) { // check if ticket still available
