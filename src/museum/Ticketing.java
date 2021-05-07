@@ -26,9 +26,9 @@ public class Ticketing implements Runnable{
 		if (museum.getTimer().getTime() < 32400) { //enter after the museum opens
 			timeEnter = (rand.nextInt(64800 - museum.getTimer().getTime()) + 32400);
 		} else {
-			while(timeEnter<64800){
-				timeEnter = (rand.nextInt(64800 - museum.getTimer().getTime()) + museum.getTimer().getTime());
-			} //enter before museum closes
+			do{
+				timeEnter = (rand.nextInt(61200 - museum.getTimer().getTime()) + museum.getTimer().getTime());
+			}while(timeEnter<64800); //enter before museum closes
 		}
 		
 		//generate same entering time per who buy ticket
