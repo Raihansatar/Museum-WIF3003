@@ -10,7 +10,9 @@ public class Driver {
 	}
 
 	public static void main(String[] args) {
-            // TODO Auto-generated method stub
+            
+//marijana check 
+// TODO Auto-generated method stub
             Random rand = new Random();
             Scanner scan = new Scanner(System.in);
             System.out.println("Enter start time in hours: ");
