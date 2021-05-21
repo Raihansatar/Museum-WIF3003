@@ -23,17 +23,11 @@ public class Visitor implements Runnable{
 	public void run() {
 		
 		boolean enter = false;
-<<<<<<< HEAD
-		while(museum.getTimer().getTime()<68400){
-			if(museum.getTimer().getTime()>32400){
-=======
-		
 		//while museum is not actually closed
 		while(!museum.getTimer().isMuseumActuallyClose()){
 			
 			// if museum is open
 			if(museum.getTimer().isMuseumOpen()){
->>>>>>> ajwad
 
 				// if ticket timemestamp is actual timer is less && visitor has not enter
 	            if(( this.ticket.getTimestamp() <= museum.getTimer().getTime() ) && enter == false ) {
