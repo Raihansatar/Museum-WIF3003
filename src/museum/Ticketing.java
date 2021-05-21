@@ -23,6 +23,7 @@ public class Ticketing implements Runnable{
 		
 		int timeEnter;
 		
+<<<<<<< HEAD
 		if (museum.getTimer().getTime() < 32400) { //enter after the museum opens
 			timeEnter = (rand.nextInt(64801 - museum.getTimer().getTime()) + 32400);
 		} else if(museum.getTimer().getTime() > 32400 && museum.getTimer().getTime() < 64800){
@@ -31,25 +32,54 @@ public class Ticketing implements Runnable{
 			}while(timeEnter>64800); //enter before museum closes
 		} else {
 			timeEnter = 0;
+=======
+		
+		boolean timerFlag = true;
+		while(true){
+			if(museum.getTimer().isCounterOpen()) {
+		      	break;
+			}
+		    if(timerFlag) {
+		    	System.out.println("Time is "+museum.getTimer().toString()+" ticket counter not open ["+Thread.currentThread().getName()+"]");
+		      	timerFlag=false;
+		    }
 		}
+		
+		// what is this?
+		
+		//less then 9am
+		if ((int)museum.getTimer().getTime() < museum.getTimer().getMuseumOpeningTime()) {
+			
+			// random 5pm - get timer
+			timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + 32400);
+			
+		} else {
+			
+			do {
+				timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + museum.getTimer().getTime());				
+			}while(timeEnter < museum.getTimer().getMuseumClosingTime());
+			
+>>>>>>> ajwad
+		}
+		
 		
 		//generate same entering time per who buy ticket
 		this.t = ticketSystem.buy(rand.nextInt(4) + 1, timeEnter);
 		
 		
 		if(this.t != null) {
-			Thread [] th = new Thread[t.length];
+	
+			ExecutorService pool = Executors.newFixedThreadPool(t.length);
                         
             //Set same entrance for ticket groups
             int entrance = rand.nextInt(2);
             int staying = rand.nextInt(9000)+ 3000;
                         
 			for (int i = 0; i < t.length; i++) {
-				th[i] = new Thread(new Visitor(museum, t[i], entrance, staying));
+				pool.execute(new Visitor(museum, t[i], entrance, staying));
 			}
-			for (int i = 0; i < t.length; i++) {
-				th[i].start();
-			}
+			
+			pool.shutdown();
 		}
 		
 	}

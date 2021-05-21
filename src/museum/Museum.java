@@ -14,7 +14,6 @@ public class Museum {
 	protected int maxVisitor;
 	protected int ticket;
 	protected int totalTicket;
-	protected DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
 	protected boolean[] NET = {false, false, false, false};
 	protected boolean[] SET = {false, false, false, false};
@@ -151,6 +150,7 @@ public class Museum {
 
 	public synchronized Ticket[] buyTicket(int number, int timeEnter) {
                 
+<<<<<<< HEAD
         //check if between 8:00am and 5:00pm
         while(timer.getTime()<28800 || timer.getTime()>61200){
             System.out.println("Time is "+timer.toString()+", ticket counter not open");
@@ -160,16 +160,22 @@ public class Museum {
         }
         
 		if(ticket > this.totalTicket) { // check if ticket still available
+=======
+		
+		// check if ticket still available
+>>>>>>> ajwad
 			try {
 				System.out.println(timer.toString() + " - Sorry, out of ticket. " + Thread.currentThread().getName());
-				Thread.currentThread().interrupt(); // end the thread since out of ticket
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
 			return null; // for error handling
+		
+		// ticket is not available
 		}else {
 			Ticket[] ticket = new Ticket[number]; // set array of number of tickets
+			Ticket[] ticket = new Ticket[number]; 				// set array of number of tickets
             System.out.print(timer.toString() + " - ");
 			for (int i = 0; i < number; i++) {
 				
@@ -182,7 +188,10 @@ public class Museum {
 		}
 	}
 
+	
 	public Timer getTimer() {
 		return this.timer;
 	}
+	
+	
 }

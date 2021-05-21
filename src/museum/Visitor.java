@@ -23,6 +23,7 @@ public class Visitor implements Runnable{
 	public void run() {
 		
 		boolean enter = false;
+<<<<<<< HEAD
 		while(museum.getTimer().getTime()<68400){
 			if(museum.getTimer().getTime()>32400){
 
