@@ -4,10 +4,7 @@ package museum;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Timer implements Runnable{
-<<<<<<< HEAD
-=======
-
->>>>>>> ajwad
+    
     AtomicInteger timer;
     private int hour;
     private int minutes;
@@ -34,16 +31,6 @@ public class Timer implements Runnable{
     
     public void run(){
         
-        //Stops by 6:30pm
-<<<<<<< HEAD
-        while(timer.get()<=66600){
-            try{
-                Thread.sleep(50);
-                timer.addAndGet(30);
-                if(timer.get() == 64800){
-                    System.out.println("Time is 6:00pm, museum is now closed");
-                }
-=======
         while(timer.get()<=this.MuseumActuallyClose){
         	
         	if(timer.get() == this.CounterOpen) {
@@ -63,7 +50,6 @@ public class Timer implements Runnable{
                 Thread.sleep(this.threadSleep);
                 timer.addAndGet(this.timerSkip);
                 System.out.println("["+toString()+"]");
->>>>>>> ajwad
                 
             }catch(InterruptedException e){
                 e.printStackTrace();
