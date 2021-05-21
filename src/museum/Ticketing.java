@@ -25,17 +25,6 @@ public class Ticketing implements Runnable{
 		
 		int timeEnter;
 		
-<<<<<<< HEAD
-		if (museum.getTimer().getTime() < 32400) { //enter after the museum opens
-			timeEnter = (rand.nextInt(64801 - museum.getTimer().getTime()) + 32400);
-		} else if(museum.getTimer().getTime() > 32400 && museum.getTimer().getTime() < 64800){
-			do{
-				timeEnter = (rand.nextInt(64801 - museum.getTimer().getTime()) + museum.getTimer().getTime());
-			}while(timeEnter>64800); //enter before museum closes
-		} else {
-			timeEnter = 0;
-=======
-		
 		boolean timerFlag = true;
 		while(true){
 			if(museum.getTimer().isCounterOpen()) {
@@ -60,8 +49,7 @@ public class Ticketing implements Runnable{
 			do {
 				timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + museum.getTimer().getTime());				
 			}while(timeEnter < museum.getTimer().getMuseumClosingTime());
-			
->>>>>>> ajwad
+		
 		}
 		
 		
