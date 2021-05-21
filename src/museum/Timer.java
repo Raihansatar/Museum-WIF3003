@@ -44,6 +44,25 @@ public class Timer implements Runnable{
                     System.out.println("Time is 6:00pm, museum is now closed");
                 }
 =======
+        while(timer.get()<=this.MuseumActuallyClose){
+        	
+        	if(timer.get() == this.CounterOpen) {
+        		System.out.println("["+toString()+"] COUNTER IS OPEN");
+        	}
+        	if(timer.get() == this.CounterClose) {
+        		System.out.println("["+toString()+"] COUNTER IS CLOSED");
+        	}
+        	if(timer.get() == this.MuseumOpen){
+        		System.out.println("["+toString()+"] MUSEUM IS OPEN");
+        	}
+        	if(timer.get() == this.MuseumClose){
+        		System.out.println("["+toString()+"] MUSEUM IS CLOSED");
+        	}
+        	
+            try{
+                Thread.sleep(this.threadSleep);
+                timer.addAndGet(this.timerSkip);
+                System.out.println("["+toString()+"]");
 >>>>>>> ajwad
                 
             }catch(InterruptedException e){
@@ -57,6 +76,47 @@ public class Timer implements Runnable{
         return timer.get();
     }
     
+    public int getMuseumClosingTime() {
+    	return this.MuseumClose;
+    }
+    
+    public int getMuseumOpeningTime() {
+    	return this.MuseumOpen;
+    }
+    
+    public int getCounterClosingTime() {
+    	return this.CounterClose;
+    }
+    
+    public int getCounterOpeningTime() {
+    	return this.CounterOpen;
+    }
+    
+    public boolean isCounterOpen() {
+    	if(timer.get()>=this.CounterOpen && timer.get()<=this.CounterClose) {
+    		return true;
+    	}else {
+    		return false;
+    	}
+    }
+       
+    public boolean isMuseumOpen() {
+    	if(timer.get()>=this.MuseumOpen && timer.get()<=this.MuseumClose) {
+    		return true;
+    	}else {
+    		return false;
+    	}
+    }
+    
+    public boolean isMuseumActuallyClose() {
+    	if(timer.get()<=this.MuseumActuallyClose) {
+    		return false;
+    	}else {
+    		return true;
+    	}
+    }
+    
+ 
     public String toString(){
         int hour =(int) timer.get()/60;
         int min = (int) hour % 60;

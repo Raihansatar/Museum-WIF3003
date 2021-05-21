@@ -163,6 +163,7 @@ public class Museum {
 =======
 		
 		// check if ticket still available
+		if(ticket > this.totalTicket) { 
 >>>>>>> ajwad
 			try {
 				System.out.println(timer.toString() + " - Sorry, out of ticket. " + Thread.currentThread().getName());

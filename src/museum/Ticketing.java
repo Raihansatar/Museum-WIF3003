@@ -2,6 +2,8 @@ package museum;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Ticketing implements Runnable{
 // process of buy ticket and create visitor based on the number of ticket

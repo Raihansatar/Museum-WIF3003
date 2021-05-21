@@ -34,8 +34,10 @@ public class Driver {
             tt.setName("Timer thread");
             tt.start();
             
+            Museum museum = new Museum(maxVisitors, totalTickets, timer);
             //	create museum object with parameter ( maxVisitor, total ticket available, timer thread)
 
+            ExecutorService pool = Executors.newFixedThreadPool(ticketThread);
             
 
             // create thread of person that buying the ticket and start
@@ -53,6 +55,7 @@ public class Driver {
                 th[i].start();
             }
 =======
+            pool.shutdown();            
 
 >>>>>>> ajwad
             

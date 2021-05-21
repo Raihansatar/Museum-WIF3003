@@ -26,7 +26,16 @@ public class Visitor implements Runnable{
 <<<<<<< HEAD
 		while(museum.getTimer().getTime()<68400){
 			if(museum.getTimer().getTime()>32400){
+=======
+		
+		//while museum is not actually closed
+		while(!museum.getTimer().isMuseumActuallyClose()){
+			
+			// if museum is open
+			if(museum.getTimer().isMuseumOpen()){
+>>>>>>> ajwad
 
+				// if ticket timemestamp is actual timer is less && visitor has not enter
 	            if(( this.ticket.getTimestamp() <= museum.getTimer().getTime() ) && enter == false ) {
 	
 	                if(entrance == 0){
@@ -41,6 +50,11 @@ public class Visitor implements Runnable{
             }
 			
 			
+			// if already enter
+			// and timestamp + staying time < current time      (finished visiting)
+			// or museum is closed
+			if( ((enter == true) && ((this.ticket.getTimestamp()+this.staying) <= museum.getTimer().getTime())) || (museum.getTimer().getTime()>=museum.getTimer().getMuseumClosingTime())) {
+				
 				int random = rand.nextInt(2); // randomly assigned gate to visitor to exit
 				if(random == 0) {
 					this.museum.exitEast(this.ticket);
