@@ -41,7 +41,6 @@ public class Visitor implements Runnable{
             }
 			
 			
-			if( (enter == true) && ((this.ticket.getTimestamp() + this.staying) <= museum.getTimer().getTime() ) || museum.getTimer().getTime() > 64800) {
 				int random = rand.nextInt(2); // randomly assigned gate to visitor to exit
 				if(random == 0) {
 					this.museum.exitEast(this.ticket);

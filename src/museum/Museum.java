@@ -174,7 +174,6 @@ public class Museum {
 		
 		// ticket is not available
 		}else {
-			Ticket[] ticket = new Ticket[number]; // set array of number of tickets
 			Ticket[] ticket = new Ticket[number]; 				// set array of number of tickets
             System.out.print(timer.toString() + " - ");
 			for (int i = 0; i < number; i++) {

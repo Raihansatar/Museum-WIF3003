@@ -39,8 +39,6 @@ public class Driver {
             
 
             // create thread of person that buying the ticket and start
-            for (int i = 0; i < th.length; i++) {
-                    th[i] = new Thread(new Ticketing(m));
             for (int i = 0; i < ticketThread; i++) {
                 pool.execute(new Ticketing(museum));
             }
