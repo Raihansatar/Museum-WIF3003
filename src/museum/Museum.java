@@ -150,21 +150,8 @@ public class Museum {
 
 	public synchronized Ticket[] buyTicket(int number, int timeEnter) {
                 
-<<<<<<< HEAD
-        //check if between 8:00am and 5:00pm
-        while(timer.getTime()<28800 || timer.getTime()>61200){
-            System.out.println("Time is "+timer.toString()+", ticket counter not open");
-	    if(timer.getTime()>61200) {
-            	return null;
-            }
-        }
-        
-		if(ticket > this.totalTicket) { // check if ticket still available
-=======
-		
 		// check if ticket still available
 		if(ticket > this.totalTicket) { 
->>>>>>> ajwad
 			try {
 				System.out.println(timer.toString() + " - Sorry, out of ticket. " + Thread.currentThread().getName());
 			} catch (Exception e) {
