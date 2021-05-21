@@ -44,21 +44,9 @@ public class Driver {
             for (int i = 0; i < ticketThread; i++) {
                 pool.execute(new Ticketing(museum));
             }
-            
-<<<<<<< HEAD
-            for (int i = 0; i < th.length; i++) {
-                try {
-                        Thread.sleep(rand.nextInt(2400) + 600);
-                } catch (Exception e) {
-                        // TODO: handle exception
-                }
-                th[i].start();
-            }
-=======
+		
             pool.shutdown();            
 
->>>>>>> ajwad
-            
 	}
 
 }
