@@ -10,34 +10,22 @@ import javax.swing.JPanel;
 
 public class GUI {
 	
-	private JFrame frame;
-	private JPanel panel;
+	private JFrame frame = new JFrame();
+	private JPanel panel = new JPanel();
 	
-	// All text field
-	private JLabel counter_l, museum_l, time_l;
-	
+	// Other components	
+	private JLabel museum_status = new JLabel("Museum is Closed");
+	private JLabel counter_status = new JLabel("Counter is Closed");
+	private JLabel current_time = new JLabel("Time: 00:00");
 	
 	public GUI() {
 		
-		//INITIATE FRAME
-		frame = new JFrame();
-		counter_l = new JLabel("Counter - Close");
-		museum_l = new JLabel("Museum - Close");
-		time_l = new JLabel("Time - 00:00");
-		
-		
-		panel = new JPanel();
-		
-		// SET MARGIN/PADDING
-		panel.setBorder(BorderFactory.createEmptyBorder(30,30,30,30));
-		
-		// GRID LAYOUT
+		panel.setBorder(BorderFactory.createEmptyBorder(20,20,20,02));
 		panel.setLayout(new GridLayout(0,1));
 		
-		// ADDING ALL THE CREATED LABEL
-		panel.add(museum_l);
-		panel.add(counter_l);
-		panel.add(time_l);
+		panel.add(museum_status);
+		panel.add(counter_status);
+		panel.add(current_time);
 		
 		// ADDING PANEL TO FRAME
 		frame.add(panel, BorderLayout.CENTER);
@@ -48,18 +36,23 @@ public class GUI {
 		// SET FRAME TITLE
 		frame.setTitle("Museum GUI");
 		
-		
 		// SET TO VISABLE
 		frame.pack();
 		frame.setVisible(true);
 		
-		
 	}
 	
-//	
-//	public static void main(String[] args) {
-//		new GUI();
-//	}
-//	
+	public void updateTimeGUI(String time) {
+		current_time.setText(time);
+	}
+	
+	public void updateCounterGUI(String counter) {
+		counter_status.setText(counter);
+	}
+	
+	public void updateMuseumGUI(String museum) {
+		museum_status.setText(museum);
+	}
+	
 	
 }
