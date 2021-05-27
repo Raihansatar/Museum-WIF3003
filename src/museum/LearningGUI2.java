@@ -91,7 +91,6 @@ public class LearningGUI2 {
 			}
 			
 			
-
 			@Override
 			protected void process(List<Integer> chunks) {
 				// TODO Auto-generated method stub
@@ -102,7 +101,6 @@ public class LearningGUI2 {
 				time_l.setText("Current value:" + value);
 				
 			}
-
 
 
 			@Override

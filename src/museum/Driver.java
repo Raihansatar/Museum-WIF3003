@@ -40,7 +40,6 @@ public class Driver {
 
             ExecutorService pool = Executors.newFixedThreadPool(ticketThread);
             
-
             // create thread of person that buying the ticket and start
             for (int i = 0; i < ticketThread; i++) {
                 pool.execute(new Ticketing(museum));
