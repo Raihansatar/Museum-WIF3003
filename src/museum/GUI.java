@@ -324,6 +324,42 @@ public class GUI{
 		museum_status.setText(museum);
 	}
 	
+	public void updateRemainingTickets(String tickets_remaining) {
+		remaining_tickets.setText(tickets_remaining);
+	}
+	
+	public void updateSoldTickets(String tickets) {
+		sold_tickets.setText(tickets);
+	}
+	
+	public void updateTicketHolder(String holder) {
+		ticket_holder.setText(holder);
+	}
+	
+	public void updateMaxVisitor(String visitors) {
+		max_visitor.setText(visitors);
+	}
+	
+	public void currentVisitor(String visitor_count) {
+		current_visitor.setText(visitor_count);
+	}
+	
+	public void updateNorthGate(int index, String ticket) {
+		north_gates[index].setText(ticket);
+	}
+	
+	public void updateSouthGate(int index, String ticket) {
+		south_gates[index].setText(ticket);
+	}
+	
+	public void updateEastGate(int index, String ticket) {
+		east_gates[index].setText(ticket);
+	}
+	
+	public void updateWestGate(int index, String ticket) {
+		west_gates[index].setText(ticket);
+	}
+	
 	public static void main(String[] args) {
 		new GUI();
 	}
