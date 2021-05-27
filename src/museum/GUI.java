@@ -14,9 +14,6 @@ import javax.swing.border.Border;
 
 public class GUI{
 	
-		
-	
-	
 	// Other componens
 	private JLabel current_time;
 	private JLabel museum_status;
@@ -268,7 +265,6 @@ public class GUI{
 		frame.setVisible(true);
 		
 	}
-	
 	
 	private JLabel createLabel(String labelName , boolean addborder, boolean bold, int size) {
 		JLabel newLabel = new JLabel(labelName);
