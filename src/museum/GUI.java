@@ -36,7 +36,7 @@ public class GUI{
 	private JLabel enter_gate;
 	private JLabel exit_gate;
 
-	private Border border = BorderFactory.createLineBorder(Color.BLACK,1);
+	private Border borderLine = BorderFactory.createLineBorder(Color.BLACK,1);
 	
 	public GUI() {
 		
@@ -134,7 +134,7 @@ public class GUI{
 		newLabel.setHorizontalAlignment(JLabel.CENTER);
 		
 		if(addborder == true) {
-			newLabel.setBorder(border);			
+			newLabel.setBorder(borderLine);			
 		}
 		
 		if(bold == true) {
@@ -151,7 +151,7 @@ public class GUI{
 		newPanel.setLayout(new GridLayout(row,column));
 		
 		if(addBorder == true) {
-			newPanel.setBorder(border);
+			newPanel.setBorder(borderLine);
 		}
 		
 		return newPanel;
