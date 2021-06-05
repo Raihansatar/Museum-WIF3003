@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Timer implements Runnable{
     
+	private GUI gui;
     AtomicInteger timer;
     private int hour;
     private int minutes;
@@ -12,7 +13,7 @@ public class Timer implements Runnable{
     
     
     private int timerSkip = 60; //skip time in seconds
-    private int threadSleep = 5; //how fast the time skip
+    private int threadSleep = 100; //how fast the time skip
     
     private int CounterOpen = 28800; //08:00  (8am)
     private int CounterClose = 61200; // 17:00 (5pm)
@@ -22,7 +23,8 @@ public class Timer implements Runnable{
     private int MuseumActuallyClose = 67800; // 18:50 (6:50pm)
     
     
-    public Timer(int hour, int minutes){
+    public Timer(GUI gui,int hour, int minutes){
+    	this.gui = gui;
         this.hour = hour*3600;
         this.minutes = minutes*60;
         this.startTimeInSec = this.hour + this.minutes;
@@ -35,20 +37,27 @@ public class Timer implements Runnable{
         	
         	if(timer.get() == this.CounterOpen) {
         		System.out.println("["+toString()+"] COUNTER IS OPEN");
+        		gui.updateCounterGUI("COUNTER IS OPEN");
         	}
         	if(timer.get() == this.CounterClose) {
         		System.out.println("["+toString()+"] COUNTER IS CLOSED");
+        		gui.updateCounterGUI("COUNTER IS CLOSED");
         	}
         	if(timer.get() == this.MuseumOpen){
         		System.out.println("["+toString()+"] MUSEUM IS OPEN");
+        		gui.updateMuseumGUI("MUSEUM IS OPEN");
         	}
         	if(timer.get() == this.MuseumClose){
         		System.out.println("["+toString()+"] MUSEUM IS CLOSED");
+        		gui.updateMuseumGUI("MUSEUM IS CLOSED");
         	}
         	
             try{
                 Thread.sleep(this.threadSleep);
                 timer.addAndGet(this.timerSkip);
+                
+                gui.updateTimeGUI("TIME: "+toString());
+                
                 System.out.println("["+toString()+"]");
                 
             }catch(InterruptedException e){

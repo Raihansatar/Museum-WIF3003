@@ -15,6 +15,7 @@ public class Driver {
             // TODO Auto-generated method stub
             Random rand = new Random();
             Scanner scan = new Scanner(System.in);
+            GUI gui = new GUI();
             
             System.out.println("Enter start time in hours: ");
             int hours = scan.nextInt();
@@ -29,7 +30,7 @@ public class Driver {
             System.out.println("Enter number of people buying the tickets: ");
             int ticketThread = scan.nextInt();
             
-            Timer timer = new Timer(hours, minutes);
+            Timer timer = new Timer(gui, hours, minutes);
             Thread tt = new Thread(timer);
             tt.setName("Timer thread");
             tt.start();
@@ -39,7 +40,6 @@ public class Driver {
 
             ExecutorService pool = Executors.newFixedThreadPool(ticketThread);
             
-
             // create thread of person that buying the ticket and start
             for (int i = 0; i < ticketThread; i++) {
                 pool.execute(new Ticketing(museum));
