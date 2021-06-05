@@ -279,7 +279,6 @@ public class GUI{
 		}else {
 			newLabel.setFont(new Font("Serif", Font.PLAIN, size));
 		}
-		
 		return newLabel;
 	}
 	
