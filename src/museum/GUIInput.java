@@ -17,12 +17,7 @@ import javax.swing.JTextField;
 
 public class GUIInput implements ActionListener{
 	
-//	private int hour;
-//	private int minutes;
-//	private int maximumTicket;
-//	private int maximumVisitor;
-//	private int numberOfVisitor;
-//	
+
 	JFrame frame = new JFrame();
 	private JButton submitBtn = new JButton("Run Museum");
 	
@@ -126,15 +121,10 @@ public class GUIInput implements ActionListener{
 			maxVisitorField.setEditable(false);
 			numVisitorField.setEditable(false);
 			
-//			this.hour = Integer.parseInt(hourField.getText());
-//			this.minutes = Integer.parseInt(minutesField.getText());
-//			this.maximumTicket = Integer.parseInt(maxTicketField.getText());
-//			this.maximumVisitor = Integer.parseInt(maxVisitorField.getText());
-//			this.numberOfVisitor = Integer.parseInt(numVisitorField.getText());
 			
 			frame.dispose();
 			
-//			-------------------------------------------------------------------------
+//			START DRIVER HERE
 			
 			GUI gui = new GUI();
             Timer timer = new Timer(gui, Integer.parseInt(hourField.getText()), Integer.parseInt(minutesField.getText()));
@@ -158,30 +148,5 @@ public class GUIInput implements ActionListener{
 		
 	}
 	
-//	public int getHour() {
-//		return this.hour;
-//	}
-//	
-//	public int getMinutes() {
-//		return this.minutes;
-//	}
-//	
-//	public int getMaxTicket() {
-//		return this.maximumTicket;
-//	}
-//	
-//	public int getMaxVisitor() {
-//		return this.maximumVisitor;
-//	}
-//	
-//	public int getNumOfVisitor() {
-//		return this.numberOfVisitor;
-//	}
-	
-	
-//	public static void main(String[] args) {
-//		new GUIInput();
-//	}
-
 	
 }
