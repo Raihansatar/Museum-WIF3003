@@ -360,9 +360,9 @@ public class GUI{
 		west_gates[index].setText(ticket);
 	}
 	
-	public static void main(String[] args) {
-		new GUI();
-	}
+//	public static void main(String[] args) {
+//		new GUI();
+//	}
 	
 	
 	
