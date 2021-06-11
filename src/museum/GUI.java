@@ -40,17 +40,25 @@ public class GUI{
 								
 							// createLabel(Label text, add border, bold text, text size)
 		current_time 		= createLabel("TIME: 00:00", false, true, 30);
-		museum_status 		= createLabel("Museum", true, false, 12);
-		counter_status 		= createLabel("Counter", true, false, 12);
+		museum_status 		= createLabel("MUSEUM IS CLOSED", true, true, 12);
+		museum_status.setForeground(Color.WHITE);
+		museum_status.setBackground(Color.RED);
+		museum_status.setOpaque(true);
+		
+		counter_status 		= createLabel("COUNTER IS CLOSED", true, true, 12);
+		counter_status.setForeground(Color.WHITE);
+		counter_status.setBackground(Color.RED);
+		counter_status.setOpaque(true);
 		
 		JLabel ticket_label = createLabel("Tickets", false, true, 20);
 		remaining_tickets 	= createLabel("XXX", true, false, 12);
-		sold_tickets 		= createLabel("XXX", true, false, 12);
-		ticket_holder 		= createLabel("XXX", false, false, 12);
+		sold_tickets 		= createLabel("0", true, false, 12);
+		ticket_holder 		= createLabel("insert ticket holder here", false, false, 12);
 
 		JLabel visitor_label= createLabel("Visitor Count", false, true, 20);
 		max_visitor 		= createLabel("XXX", true, false, 12);
-		current_visitor 	= createLabel("XXX", true, false, 12);
+		current_visitor 	= createLabel("0", true, false, 12);
+		current_visitor.setBackground(Color.YELLOW);
 		
 		JLabel enter_gate 	= createLabel("Enter Gate", false, true, 30);
 		JLabel exit_gate 	= createLabel("Exit Gate", false, true, 30);
@@ -315,16 +323,36 @@ public class GUI{
 		current_time.setText(time);
 	}
 	
-	public void updateCounterGUI(String counter) {
+	public void updateCounterGUI(String counter, boolean isOpen) {
 		counter_status.setText(counter);
+		if(isOpen == true) {
+			counter_status.setForeground(Color.BLACK);
+			counter_status.setBackground(Color.GREEN);
+		}else {
+			counter_status.setForeground(Color.WHITE);
+			counter_status.setBackground(Color.RED);
+		}
 	}
 	
-	public void updateMuseumGUI(String museum) {
+	public void updateMuseumGUI(String museum, boolean isOpen) {
 		museum_status.setText(museum);
+		if(isOpen == true) {
+			museum_status.setForeground(Color.BLACK);
+			museum_status.setBackground(Color.GREEN);
+		}else {
+			museum_status.setForeground(Color.WHITE);
+			museum_status.setBackground(Color.RED);
+		}
 	}
 	
-	public void updateRemainingTickets(String tickets_remaining) {
+	public void updateRemainingTickets(String tickets_remaining, boolean isAvailable) {
 		remaining_tickets.setText(tickets_remaining);
+		
+		if(isAvailable == false) {
+			remaining_tickets.setForeground(Color.WHITE);
+			remaining_tickets.setBackground(Color.RED);
+			remaining_tickets.setOpaque(true);
+		}
 	}
 	
 	public void updateSoldTickets(String tickets) {
@@ -339,8 +367,14 @@ public class GUI{
 		max_visitor.setText(visitors);
 	}
 	
-	public void currentVisitor(String visitor_count) {
+	public void updateCurrentVisitor(String visitor_count, boolean isFull) {
 		current_visitor.setText(visitor_count);
+		
+		if(isFull) {
+			current_visitor.setOpaque(true);
+		}else {
+			current_visitor.setOpaque(false);
+		}
 	}
 	
 	public void updateNorthGate(int index, String ticket) {

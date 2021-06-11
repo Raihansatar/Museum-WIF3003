@@ -129,15 +129,21 @@ public class GUIInput implements ActionListener{
 			GUI gui = new GUI();
             Timer timer = new Timer(gui, Integer.parseInt(hourField.getText()), Integer.parseInt(minutesField.getText()));
             Thread tt = new Thread(timer);
-            tt.setName("Timer thread");
-            tt.start();
             
-            Museum museum = new Museum(Integer.parseInt(maxVisitorField.getText()), Integer.parseInt(maxTicketField.getText()), timer);
+            gui.updateRemainingTickets(maxTicketField.getText()+" Remaining", true);
+            gui.updateMaxVisitor(maxVisitorField.getText()+" Max Visitor");
+            
+            
+            tt.setName("Timer thread");
+            
+            Museum museum = new Museum(Integer.parseInt(maxVisitorField.getText()), Integer.parseInt(maxTicketField.getText()), timer, gui);
             //	create museum object with parameter ( maxVisitor, total ticket available, timer thread)
 
             ExecutorService pool = Executors.newFixedThreadPool(Integer.parseInt(numVisitorField.getText()));
+
             
             // create thread of person that buying the ticket and start
+            tt.start();
             for (int i = 0; i < Integer.parseInt(numVisitorField.getText()); i++) {
                 pool.execute(new Ticketing(museum));
             }
