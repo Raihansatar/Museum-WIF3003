@@ -177,7 +177,7 @@ public class Museum {
 		System.out.println("  Total Visitor: " + this.visitor);
 		
 		gui.updateTicketHolder("Ticket " + ticket.getID() + " exited through Turnstile EWT" + (turnstiles + 1));
-		gui.updateEastGate(turnstiles, ticket.getID());
+		gui.updateWestGate(turnstiles, ticket.getID());
 		
 		WET[turnstiles] = false;
 		

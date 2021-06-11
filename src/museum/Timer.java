@@ -13,7 +13,7 @@ public class Timer implements Runnable{
     
     
     private int timerSkip = 60; //skip time in seconds
-    private int threadSleep = 500; //how fast the time skip
+    private int threadSleep = 200; //how fast the time skip
     
     private int CounterOpen = 28800; //08:00  (8am)
     private int CounterClose = 61200; // 17:00 (5pm)
