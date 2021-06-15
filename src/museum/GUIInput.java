@@ -145,6 +145,11 @@ public class GUIInput implements ActionListener{
             // create thread of person that buying the ticket and start
             tt.start();
             for (int i = 0; i < Integer.parseInt(numVisitorField.getText()); i++) {
+		 try {
+	                Thread.sleep(rand.nextInt(2400) + 600);
+	        } catch (Exception e) {
+	                  // TODO: handle exception
+	         }
                 pool.execute(new Ticketing(museum));
             }
 		
