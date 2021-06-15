@@ -10,6 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Museum {
 
+	protected GUI gui;
 	protected int visitor;
 	protected int maxVisitor;
 	protected int ticket;
@@ -23,13 +24,14 @@ public class Museum {
 	Random rand = new Random();
         private Timer timer;
 	
-	public Museum(int maxVisitor ,int totalTicket, Timer timer) {
+	public Museum(int maxVisitor ,int totalTicket, Timer timer, GUI gui) {
 		// TODO Auto-generated constructor stub
 		this.visitor = 0;
 		this.maxVisitor = maxVisitor;
 		this.ticket = 1;
 		this.totalTicket = totalTicket;
         this.timer = timer;
+        this.gui = gui;
 	}
 	
 	// enter south gate
@@ -39,6 +41,8 @@ public class Museum {
 		while(this.visitor > this.maxVisitor) { // check if current visitor more that max visitor allowed in the museum
 			try {
 				System.out.println("Waiting... Museum exceed limit");
+				gui.updateTicketHolder("Waiting... Museum exceed limit");
+				
 				wait(); // wait until museum not occupied
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -57,13 +61,25 @@ public class Museum {
 				e.printStackTrace();
 			}
 		}
+		
 		SET[turnstiles] = true; // set turnstile to true (in use)
 		
 		
+		
 		visitor++; // increase the number of visitor in museum
-                System.out.print(timer.toString() + " - ");
+        System.out.print(timer.toString() + " - ");
 		System.out.print(t.getID() + " with time " + t.getTicketTime()+ "  entering through Turnsile SET"+ (turnstiles + 1) +". Staying for " + staying + " minutes  \n");
+		
+		
+		// UPDATE GUI TICKETS AND GATE		
+		gui.updateTicketHolder(t.getID() + " with time " + t.getTicketTime()+ "  entering through Turnsile SET"+ (turnstiles + 1) +". Staying for " + staying + " minutes");
+		gui.updateSouthGate(turnstiles, t.getID());
+		
+		
 		SET[turnstiles] = false; // set turnstile to free
+		
+		// UPDATE GUI VISITOR	
+		updateVisitorGUI();
 				
 		notifyAll();
 	}
@@ -74,6 +90,8 @@ public class Museum {
 		while(this.visitor > this.maxVisitor) {
             try {
                 System.out.println("Waiting... Museum exceed limit");
+                gui.updateTicketHolder("Waiting... Museum exceed limit");
+                
                 wait();
             } catch (Exception e) {
                 // TODO: handle exception
@@ -93,10 +111,18 @@ public class Museum {
 		NET[turnstiles] = true;
 		
 		visitor++;
-                System.out.print(timer.toString() + " - ");
+        System.out.print(timer.toString() + " - ");
 		System.out.print(t.getID() + " with time " + t.getTicketTime()+ " entering through Turnsile NET"+(turnstiles + 1) +". Staying for " + staying + " minutes \n");
 		
+		gui.updateTicketHolder(t.getID() + " with time " + t.getTicketTime()+ "  entering through Turnsile NET"+ (turnstiles + 1) +". Staying for " + staying + " minutes");
+		gui.updateNorthGate(turnstiles, t.getID());
+		
+		
 		NET[turnstiles] = false;
+		
+		
+		updateVisitorGUI();
+		
 		notifyAll();
 	}
 	
@@ -116,10 +142,16 @@ public class Museum {
 		EET[turnstiles] = true;
 		
 		visitor--;
-                System.out.print(timer.toString() + " - ");
+        System.out.print(timer.toString() + " - ");
 		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EET" + (turnstiles + 1));
 		System.out.println("  Total Visitor: " + this.visitor);
+		
+		gui.updateTicketHolder("Ticket " + ticket.getID() + " exited through Turnstile EET" + (turnstiles + 1));
+		gui.updateEastGate(turnstiles, ticket.getID());
+		
 		EET[turnstiles] = false;
+		
+		updateVisitorGUI();
 		
 		notifyAll();
 	}
@@ -140,10 +172,16 @@ public class Museum {
 		
 		visitor--;
 	
-                System.out.print(timer.toString() + " - ");
+        System.out.print(timer.toString() + " - ");
 		System.out.print("Ticket " + ticket.getID() + " exited through Turnstile EWT" + (turnstiles + 1));
 		System.out.println("  Total Visitor: " + this.visitor);
+		
+		gui.updateTicketHolder("Ticket " + ticket.getID() + " exited through Turnstile EWT" + (turnstiles + 1));
+		gui.updateWestGate(turnstiles, ticket.getID());
+		
 		WET[turnstiles] = false;
+		
+		updateVisitorGUI();
 		
 		notifyAll();
 	}
@@ -152,8 +190,12 @@ public class Museum {
                 
 		// check if ticket still available
 		if(ticket > this.totalTicket) { 
+			gui.updateRemainingTickets("SOLD OUT", false);
 			try {
+				
+				gui.updateTicketHolder(timer.toString() + " - Sorry, out of ticket. " + Thread.currentThread().getName());
 				System.out.println(timer.toString() + " - Sorry, out of ticket. " + Thread.currentThread().getName());
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -163,14 +205,24 @@ public class Museum {
 		// ticket is not available
 		}else {
 			Ticket[] ticket = new Ticket[number]; 				// set array of number of tickets
-            System.out.print(timer.toString() + " - ");
+			
+			String ticketholder = timer.toString() + " - ";
+
 			for (int i = 0; i < number; i++) {
-				
 				ticket[i] = new Ticket(this.ticket, timeEnter); // create object ticket
-				System.out.print(ticket[i].getID() + " (" + ticket[i].getTicketTime() +  ") ");
+				
+				
+				ticketholder += ticket[i].getID() + " (" + ticket[i].getTicketTime() +  ") ";
+				
 				this.ticket++; // basically this is decrease number of the tickets available in the museum
+				
+				gui.updateRemainingTickets((this.totalTicket - this.ticket)+" Remaining", true);
+				gui.updateSoldTickets(this.ticket+" Sold");
 			}
-			System.out.println("SOLD");
+			
+			gui.updateTicketHolder(ticketholder+ "SOLD");
+			System.out.println(ticketholder+ "SOLD");
+			
 			return ticket;
 		}
 	}
@@ -179,6 +231,15 @@ public class Museum {
 	public Timer getTimer() {
 		return this.timer;
 	}
+	
+	private void updateVisitorGUI() {
+		if(this.visitor>=this.maxVisitor) {
+			gui.updateCurrentVisitor("Museum Is Full", true);			
+		}else {
+			gui.updateCurrentVisitor(this.visitor+" Visitors", false);
+		}
+	}
+
 	
 	
 }

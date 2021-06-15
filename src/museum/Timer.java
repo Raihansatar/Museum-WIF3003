@@ -13,7 +13,7 @@ public class Timer implements Runnable{
     
     
     private int timerSkip = 60; //skip time in seconds
-    private int threadSleep = 100; //how fast the time skip
+    private int threadSleep = 200; //how fast the time skip
     
     private int CounterOpen = 28800; //08:00  (8am)
     private int CounterClose = 61200; // 17:00 (5pm)
@@ -37,19 +37,19 @@ public class Timer implements Runnable{
         	
         	if(timer.get() == this.CounterOpen) {
         		System.out.println("["+toString()+"] COUNTER IS OPEN");
-        		gui.updateCounterGUI("COUNTER IS OPEN");
+        		gui.updateCounterGUI("COUNTER IS OPEN", true);
         	}
         	if(timer.get() == this.CounterClose) {
         		System.out.println("["+toString()+"] COUNTER IS CLOSED");
-        		gui.updateCounterGUI("COUNTER IS CLOSED");
+        		gui.updateCounterGUI("COUNTER IS CLOSED", false);
         	}
         	if(timer.get() == this.MuseumOpen){
         		System.out.println("["+toString()+"] MUSEUM IS OPEN");
-        		gui.updateMuseumGUI("MUSEUM IS OPEN");
+        		gui.updateMuseumGUI("MUSEUM IS OPEN", true);
         	}
         	if(timer.get() == this.MuseumClose){
         		System.out.println("["+toString()+"] MUSEUM IS CLOSED");
-        		gui.updateMuseumGUI("MUSEUM IS CLOSED");
+        		gui.updateMuseumGUI("MUSEUM IS CLOSED", false);
         	}
         	
             try{
@@ -57,8 +57,8 @@ public class Timer implements Runnable{
                 timer.addAndGet(this.timerSkip);
                 
                 gui.updateTimeGUI("TIME: "+toString());
-                
-                System.out.println("["+toString()+"]");
+//                
+//                System.out.println("["+toString()+"]");
                 
             }catch(InterruptedException e){
                 e.printStackTrace();
