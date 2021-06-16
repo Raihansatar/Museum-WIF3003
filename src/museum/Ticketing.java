@@ -36,20 +36,15 @@ public class Ticketing implements Runnable{
 		    }
 		}
 		
-		// what is this?
-		
 		//less then 9am
 		if ((int)museum.getTimer().getTime() < museum.getTimer().getMuseumOpeningTime()) {
 			
-			// random 5pm - get timer
-			timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + 32400);
-			
+			//entry time = museum opening time + 0-10 minutes
+			timeEnter = (int) ( museum.getTimer().getMuseumOpeningTime() + rand.nextInt(600) );
 		} else {
 			
-			do {
-				timeEnter = (int) (rand.nextInt(61200 - (int)museum.getTimer().getTime()) + museum.getTimer().getTime());				
-			}while(timeEnter < museum.getTimer().getMuseumClosingTime());
-		
+			//entry time = current time + 0-10 minutes
+                        timeEnter = (int) (museum.getTimer().getTime() + rand.nextInt(600));
 		}
 		
 		
@@ -63,6 +58,7 @@ public class Ticketing implements Runnable{
                         
             //Set same entrance for ticket groups
             int entrance = rand.nextInt(2);
+            //Set time staying between 50 minutes to 150 minutes
             int staying = rand.nextInt(9000)+ 3000;
                         
 			for (int i = 0; i < t.length; i++) {

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -139,22 +140,37 @@ public class GUIInput implements ActionListener{
             Museum museum = new Museum(Integer.parseInt(maxVisitorField.getText()), Integer.parseInt(maxTicketField.getText()), timer, gui);
             //	create museum object with parameter ( maxVisitor, total ticket available, timer thread)
 
-            ExecutorService pool = Executors.newFixedThreadPool(Integer.parseInt(numVisitorField.getText()));
 
             
             // create thread of person that buying the ticket and start
             tt.start();
-            for (int i = 0; i < Integer.parseInt(numVisitorField.getText()); i++) {
-		 try {
-	                Thread.sleep(rand.nextInt(2400) + 600);
-	        } catch (Exception e) {
-	                  // TODO: handle exception
-	         }
-                pool.execute(new Ticketing(museum));
-            }
-		
-            pool.shutdown();            
 
+            
+            // create an anonymous runnable for the purpose of buying tickets 
+            Thread ticketBuyer = new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					ExecutorService pool = Executors.newFixedThreadPool(Integer.parseInt(maxVisitorField.getText()));
+					Random rand = new Random();
+			        for (int i = 0; i < Integer.parseInt(maxVisitorField.getText()); i++) {
+			    	try {
+			                Thread.sleep(rand.nextInt(2400) + 600);
+			        } catch (Exception f) {
+			                  // TODO: handle exception
+			         }
+			            pool.execute(new Ticketing(museum));
+			        }
+				
+			        pool.shutdown();   
+					
+				}
+            	
+            });
+            
+            ticketBuyer.start();
+            
+            
 		}
 		
 	}
