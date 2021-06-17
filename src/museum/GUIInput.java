@@ -137,28 +137,25 @@ public class GUIInput implements ActionListener{
             
             tt.setName("Timer thread");
             
-            Museum museum = new Museum(Integer.parseInt(maxVisitorField.getText()), Integer.parseInt(maxTicketField.getText()), timer, gui);
             //	create museum object with parameter ( maxVisitor, total ticket available, timer thread)
+            Museum museum = new Museum(Integer.parseInt(maxVisitorField.getText()), Integer.parseInt(maxTicketField.getText()), timer, gui);
 
-
-            
-            // create thread of person that buying the ticket and start
+            //start timer
             tt.start();
-
             
             // create an anonymous runnable for the purpose of buying tickets 
             Thread ticketBuyer = new Thread(new Runnable() {
 
 				@Override
 				public void run() {
-					ExecutorService pool = Executors.newFixedThreadPool(Integer.parseInt(maxVisitorField.getText()));
+					ExecutorService pool = Executors.newFixedThreadPool(Integer.parseInt(numVisitorField.getText()));
 					Random rand = new Random();
-			        for (int i = 0; i < Integer.parseInt(maxVisitorField.getText()); i++) {
-			    	try {
-			                Thread.sleep(rand.nextInt(2400) + 600);
-			        } catch (Exception f) {
-			                  // TODO: handle exception
-			         }
+			        for (int i = 0; i < Integer.parseInt(numVisitorField.getText()); i++) {
+				    	try {
+				                Thread.sleep(rand.nextInt(2400) + 600);
+				        } catch (Exception f) {
+				                  // TODO: handle exception
+				        }
 			            pool.execute(new Ticketing(museum));
 			        }
 				

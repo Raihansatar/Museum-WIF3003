@@ -31,7 +31,8 @@ public class Ticketing implements Runnable{
 		      	break;
 			}
 		    if(timerFlag) {
-		    	System.out.println("Time is "+museum.getTimer().toString()+" ticket counter not open ["+Thread.currentThread().getName()+"]");
+		    	museum.gui.updateTicketHolder(museum.getTimer().toString()+" - ticket counter not open ["+Thread.currentThread().getName()+"]");
+		    	System.out.println(museum.getTimer().toString()+" - ticket counter not open ["+Thread.currentThread().getName()+"]");
 		      	timerFlag=false;
 		    }
 		}

@@ -6,4 +6,5 @@
  *
  */
 module museum {
+	requires java.desktop;
 }

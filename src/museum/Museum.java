@@ -1,12 +1,6 @@
 package museum;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.Random;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Museum {
 
@@ -187,10 +181,9 @@ public class Museum {
 	}
 
 	public synchronized Ticket[] buyTicket(int number, int timeEnter) {
-                
+         
 		// check if ticket still available
 		if(ticket > this.totalTicket) { 
-			gui.updateRemainingTickets("SOLD OUT", false);
 			try {
 				
 				gui.updateTicketHolder(timer.toString() + " - Sorry, out of ticket. " + Thread.currentThread().getName());
@@ -202,6 +195,17 @@ public class Museum {
 			}
 			return null; // for error handling
 		
+		
+		// check if tickets is enough to buy
+		}else if(number > this.totalTicket-this.ticket + 1) {
+			try {
+				gui.updateTicketHolder(timer.toString() + " - Sorry, not enough of ticket available to buy "+number+" tickets. " + Thread.currentThread().getName());
+				System.out.println(timer.toString() + " - Sorry, not enough of ticket available to buy "+number+" tickets. " + Thread.currentThread().getName());				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+				
 		// ticket is not available
 		}else {
 			Ticket[] ticket = new Ticket[number]; 				// set array of number of tickets
@@ -214,14 +218,20 @@ public class Museum {
 				
 				ticketholder += ticket[i].getID() + " (" + ticket[i].getTicketTime() +  ") ";
 				
+				gui.updateSoldTickets(this.ticket+" Sold");
+				System.out.println(this.ticket+" Sold");
+				gui.updateRemainingTickets((this.totalTicket - this.ticket)+" Remaining", true);
+
 				this.ticket++; // basically this is decrease number of the tickets available in the museum
 				
-				gui.updateRemainingTickets((this.totalTicket - this.ticket)+" Remaining", true);
-				gui.updateSoldTickets(this.ticket+" Sold");
 			}
 			
 			gui.updateTicketHolder(ticketholder+ "SOLD");
 			System.out.println(ticketholder+ "SOLD");
+			
+			if(this.ticket > this.totalTicket) {
+				gui.updateRemainingTickets("SOLD OUT", false);
+			}
 			
 			return ticket;
 		}
@@ -231,6 +241,7 @@ public class Museum {
 	public Timer getTimer() {
 		return this.timer;
 	}
+	
 	
 	private void updateVisitorGUI() {
 		if(this.visitor>=this.maxVisitor) {
